@@ -11,6 +11,10 @@ class IndexController extends Admin
 {
 
     public $perPage = 100;
+    /* тут должен быть slug модуля для правильной работы меню */
+    public $page = 'tree';
+    /* тут должен быть slug группы для правильной работы меню */
+    public $pageGroup = 'content';
 
     public function getModel()
     {

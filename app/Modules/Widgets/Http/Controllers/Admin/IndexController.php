@@ -9,6 +9,11 @@ use App\Modules\Widgets\Models\Widget;
 class IndexController extends Admin
 {
 
+    /* тут должен быть slug модуля для правильной работы меню */
+    public $page = 'widgets';
+    /* тут должен быть slug группы для правильной работы меню */
+    public $pageGroup = 'content';
+
     public function getModel(){
         return new Widget();
     }

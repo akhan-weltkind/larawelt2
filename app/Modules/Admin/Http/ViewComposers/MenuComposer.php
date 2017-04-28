@@ -22,8 +22,8 @@ class MenuComposer
         }
 
         foreach ($modules as $module => $info) {
-
             $config = module_config('menu', strtolower($module));
+
             if (isset($config['groups'])) {
 
                 $groups = array_merge($groups, $config['groups']);
@@ -51,6 +51,7 @@ class MenuComposer
         $groups = $groups->toArray();
         foreach ($groups as &$group) {
             foreach ($items as $item) {
+
                 if ($item['group'] == $group['slug']){
                     $group['items'][] = $item;
                 }

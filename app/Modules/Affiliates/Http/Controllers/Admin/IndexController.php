@@ -11,6 +11,9 @@ class IndexController extends Admin
 {
     use Priority;
 
+    /* тут должен быть slug модуля для правильной работы меню */
+    public $page = 'affiliates';
+
     public function getModel(){
         return new Affiliates();
     }
