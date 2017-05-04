@@ -2,6 +2,7 @@
 @if ($id)
     <script src="/adminlte/plugins/jQueryUi/jquery-ui.min.js"></script>
 
+
     <script>
 
         $(document).ready(function () {
@@ -51,8 +52,14 @@
 
             $(document).on('change', '#fileupload', function () {
 
-                var formData = new FormData();
-                formData.append('image', $('#fileupload')[0].files[0]);
+                var formData    = new FormData(),
+                    fileUpload  = $('#fileupload')[0].files;
+
+                $.each(fileUpload, function(index, value){
+                    formData.append('image[]', value);
+                });
+
+
 
                 $.ajax({
                     url: '{!! URL::route($routePrefix."store", ["parent"=>$id]) !!}',
@@ -64,6 +71,12 @@
                     processData: false,
                     contentType: false,       // The content type used when sending data to the server.
                     cache: false,             // To unable request pages to be cached
+                    beforeSend: function(){
+                        $("#myModal").modal({backdrop: false});
+                    },
+                    complete: function() {
+                        $("#myModal").modal("hide");
+                    },
                     success: function (data)   // A function to be called if request succeeds
                     {
                         if (data.state == 'error') {
@@ -72,11 +85,9 @@
                         else {
                             loadImages();
                         }
-
                     }
                 });
             });
-
 
             function loadImages() {
                 $('#images-list').load('{!! URL::route($routePrefix."index", ["parent"=>$id]) !!}');
@@ -87,7 +98,15 @@
 @endpush
 
 @if ($id)
-
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{{ asset('/img/preloader.svg') }}" alt="loader">
+                </div>
+            </div>
+        </div>
+    </div>
 
     {!! BootForm::label('Изображения') !!}
 
@@ -95,7 +114,7 @@
         <span class="btn btn-success fileinput-button">
             <i class="icon-plus icon-white"></i>
             <span>Выберите изображение...</span>
-            <input id="fileupload" type="file" name="image">
+            <input id="fileupload" multiple type="file" name="image">
         </span>
     </div>
 

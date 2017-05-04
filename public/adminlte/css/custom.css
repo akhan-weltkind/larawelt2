@@ -122,3 +122,19 @@ table.table td.controls{
 .filters-button{
     padding-left: 130px;
 }
+
+.timeline-body {
+    width: 155px;
+    height: 140px;
+    overflow: hidden;
+}
+
+.timeline-body img {
+    max-height: 130px;
+}
+
+.modal-content {
+    border-radius: 100%;
+    background: #222d32;
+    text-align: center;
+}

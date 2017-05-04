@@ -47,23 +47,31 @@ abstract class Images extends Controller
 
         $entity = $this->getParentModel()->findOrFail($parent);
 
+
+
         if ($request->hasFile($this->configField)) {
 
-            $validator = Validator::make($request->all(), [$this->configField => $this->getConfig()['validator']]);
 
-            if ($validator->fails()) {
-                return response()->json(['state' => 'error', 'message' => $validator->errors()->first()], 200);
+            foreach ($request->file($this->configField) as $item) {
+                $validator = Validator::make([ $this->configField => $item], [$this->configField => $this->getConfig()['validator']]);
+
+                if ($validator->fails()) {
+                    return response()->json(['state' => 'error', 'message' => $validator->errors()->first()], 200);
+                }
             }
 
-            $file = $request->file($this->configField);
 
-            if (Uploader::upload($file, $this->getConfig())) {
+            $files = $request->file($this->configField);
 
-                $image = $this->getModel();
-                $image->{$this->getConfig()['field']} = Uploader::getName();
-                $image->position = 0;
-                $image->parent()->associate($entity);
-                $image->save();
+            foreach ($files as $file) {
+                if (Uploader::upload($file, $this->getConfig())) {
+
+                    $image = $this->getModel();
+                    $image->{$this->getConfig()['field']} = Uploader::getName();
+                    $image->position = 0;
+                    $image->parent()->associate($entity);
+                    $image->save();
+                }
             }
         }
 
