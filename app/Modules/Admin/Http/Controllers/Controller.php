@@ -19,7 +19,8 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin.user');
+
         View::share('page', $this->page);
         View::share('pageGroup', $this->pageGroup);
 

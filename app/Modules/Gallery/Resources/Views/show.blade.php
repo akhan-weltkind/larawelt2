@@ -14,7 +14,7 @@
 
     @if (count($entity->images()))
     <div class="gallery-full__list">
-        @foreach($entity->images as $image)
+        @foreach($entity->images()->orderBy('position')->orderBy('id', 'desc')->get() as $image)
         <div class="gallery-full__item">
             <div class="gallery-full__image">
                 <a href="{{$image->image_full}}" rel="gallery">

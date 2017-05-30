@@ -91,7 +91,17 @@
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             @include('tree::menu')
-
+                            <div class="top_auth">
+                                @if(Auth::check())
+                                    <p>{{ Auth::user()->name }}</p>
+                                    <p>/</p>
+                                    <a href="{{ route('user.logout') }}">Выйти</a>
+                                @else
+                                    <a href="{{ route('user.login') }}">Вход</a>
+                                    <p>/</p>
+                                    <a href="{{ route('user.register') }}">Регистрация</a>
+                                @endif
+                            </div>
                             @include('common.languages')
 
                             @include('search::main')

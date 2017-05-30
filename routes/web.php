@@ -3,7 +3,6 @@ use App\Modules\Tree\Facades\Tree;
 
 try {
     Route::localizedGroup(function () {
-
         Route::group(['middleware' => ['page','meta']], function () {
             foreach (Tree::getRoutes() as $route) {
 
@@ -18,8 +17,6 @@ try {
             }
 
         });
-
-
     });
 }
 catch (PDOException $e){

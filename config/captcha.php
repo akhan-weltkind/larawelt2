@@ -25,8 +25,8 @@ return [
 
     'mini'   => [
         'length'    => 3,
-        'width'     => 60,
-        'height'    => 32,
+        'width'     => 95,
+        'height'    => 30,
     ],
 
     'inverse'   => [

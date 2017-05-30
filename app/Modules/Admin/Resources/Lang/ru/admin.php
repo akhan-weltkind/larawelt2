@@ -1,5 +1,6 @@
 <?php
 return [
+    'users' => 'Пользователи',
     'delete_record_sure'=>'Удалить запись?',
     'no_records'=>'Нет записей',
     'save'=>'Сохранить',

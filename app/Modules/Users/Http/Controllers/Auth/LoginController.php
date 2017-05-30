@@ -2,11 +2,15 @@
 
 namespace App\Modules\Users\Http\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Auth;
+use PhpParser\ErrorHandler\Collecting;
+use Validator;
+use App\Modules\Users\Models\User;
 
 class LoginController extends Controller
 {
@@ -23,6 +27,11 @@ class LoginController extends Controller
 
     use AuthenticatesUsers, ValidatesRequests;
 
+    public function getModel()
+    {
+        // TODO: Implement getModel() method.
+    }
+
     /**
      * Where to redirect users after login.
      *
@@ -35,10 +44,17 @@ class LoginController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
-        $this->redirectTo = '/'.config('cms.uri');
-        $this->middleware('admin', ['except' => 'logout']);
+        $this->redirectTo = '/';
+    }
+
+    public function getMessages(){
+        return [
+            'required'  => 'Это поле обязательно для заполнения',
+            'email'     => 'Укажите корректный электронный адрес',
+        ];
     }
 
     public function showLoginForm()
@@ -57,4 +73,7 @@ class LoginController extends Controller
 
         return redirect($this->redirectTo);
     }
+
+
+
 }

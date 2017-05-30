@@ -4,8 +4,8 @@ namespace App\Modules\Users\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Modules\Blog\Models\Blog;
 use Kyslik\ColumnSortable\Sortable;
+use App\Modules\Users\Mail\UserReset;
 
 class User extends Authenticatable
 {
@@ -63,4 +63,32 @@ class User extends Authenticatable
         return $query;
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->token = str_random(30);
+        });
+    }
+
+    public function confirmEmail()
+    {
+        $this->verified = true;
+        $this->token    = null;
+
+
+        $this->save();
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new UserReset($token));
+    }
 }

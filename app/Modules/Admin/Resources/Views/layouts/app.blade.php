@@ -7,12 +7,12 @@
         </a>
         <nav class="navbar navbar-static-top">
 
-            @if (Auth::user())
+            @if (Auth::guard('admin')->user())
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown user user-menu">
-                            <a href="{{route('admin.users.edit', Auth::user()->id)}}">
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                            <a href="{{route('admin.admins.edit', Auth::guard('admin')->user()->id)}}">
+                                <span class="hidden-xs">{{ Auth::guard('admin')->user()->name }}</span>
                             </a>
                         </li>
 
@@ -51,7 +51,7 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0
+            <b>Version</b> 2.0
         </div>
         <strong>Copyright &copy; 2016 <a href="http://weltkind.com">Lara CMS</a>.</strong> All rights
         reserved.

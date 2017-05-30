@@ -583,3 +583,34 @@ textarea {
     margin: 10px 0;
 }
 
+.top_auth {
+    float: right;
+    margin-left: 40px;
+    color: #98978b;
+}
+
+.top_auth a {
+    padding-top: 20px;
+    display: inline-block;
+    color: #98978b;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.top_auth p {
+    padding-top: 20px;
+    display: inline-block;
+    color: #98978b;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.form-group .captcha-label {
+    padding-top: 5px;
+}
+
+
