@@ -11,22 +11,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('roles')->insert(
+            array(
+                'title' => 'Администраторы',
+            )
+        );
+
         DB::table('admins')->insert(
             array(
-                'name' => 'admin',
-                'email' => 'admin@admin.ru',
-                'password' =>  bcrypt('admin'),
+                'role_id'   => '1',
+                'name'      => 'admin',
+                'email'     => 'admin@admin.ru',
+                'password'  =>  bcrypt('admin'),
                 'created_at'=>time()
             )
         );
 
-        DB::table('users')->insert(
+       /* DB::table('users')->insert(
             array(
-                'name' => 'user',
-                'email' => 'user@user.ru',
-                'password' =>  bcrypt('user'),
-                'created_at'=>time()
+                'name'          => 'user',
+                'email'         => 'user@user.ru',
+                'password'      =>  bcrypt('user'),
+                'created_at'    =>time()
             )
-        );
+        );*/
     }
 }

@@ -1,7 +1,8 @@
 <?php
 return [
-    'title'=>trans('feedback::admin.title'),
-    'localization'=>true
+    'title'         => trans('feedback::admin.title'),
+    'localization'  => true,
+    'in_roles'      => 1
 
 ];
 

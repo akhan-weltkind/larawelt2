@@ -1,7 +1,7 @@
 <?php
 
 return[
-    'title'         => trans('admins::admin.title'),
+    'title'         => 'Группы администраторов',
     'localization'  => true,
     'in_roles'      => 1
 
