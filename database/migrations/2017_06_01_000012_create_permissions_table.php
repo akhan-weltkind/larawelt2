@@ -16,11 +16,11 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('module_id');
-            $table->string('title');
             $table->tinyInteger('create');
             $table->tinyInteger('read');
             $table->tinyInteger('update');
             $table->tinyInteger('delete');
+            $table->tinyInteger('publish');
 
             $table->foreign('module_id')
                 ->references('id')

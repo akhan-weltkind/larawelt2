@@ -6,6 +6,7 @@ use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 
 
+
 class Admins extends Model
 {
     use Notifiable, Sortable;

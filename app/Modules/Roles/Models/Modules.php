@@ -11,4 +11,9 @@ class Modules extends Model
 
     public $timestamps = false;
 
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
 }

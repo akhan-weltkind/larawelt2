@@ -21,10 +21,6 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles');
         });
     }
 
@@ -35,13 +31,13 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        if ( Schema::hasTable('admins') ){
+        /*if ( Schema::hasTable('admins') ){
             Schema::table('admins', function (Blueprint $table) {
                 $table->dropForeign('admins_role_id_foreign');
                 $table->dropColumn('role_id');
             });
-        }
+        }*/
 
-        Schema::drop('admins');
+        Schema::dropIfExists('admins');
     }
 }

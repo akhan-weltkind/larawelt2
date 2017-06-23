@@ -4,6 +4,7 @@ namespace App\Modules\Admins\Http\Controllers\Admin;
 use App\Modules\Admin\Models\Admin as Model;
 use View;
 use App\Modules\Admin\Http\Controllers\Admin;
+use App\Modules\Roles\Models\Roles;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -39,7 +40,10 @@ class IndexController extends Admin
 
         $this->after($entity);
 
-        return view($this->getFormViewName(), ['entity'=>$entity]);
+        return view($this->getFormViewName(), [
+            'entity'    => $entity,
+            'roles'     => Roles::getSelect()
+        ]);
     }
 
     public function edit($id)
@@ -52,7 +56,11 @@ class IndexController extends Admin
 
         return view(
             $this->getFormViewName(),
-            ['entity'=>$entity, 'routePrefix'=>$this->routePrefix]
+            [
+                'entity'=>$entity,
+                'routePrefix'=>$this->routePrefix,
+                'roles'     => Roles::getSelect()
+            ]
         );
     }
 

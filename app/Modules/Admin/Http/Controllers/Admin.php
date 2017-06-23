@@ -3,8 +3,10 @@
 namespace App\Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\View;
+
 
 
 abstract class Admin extends Controller
@@ -32,9 +34,6 @@ abstract class Admin extends Controller
 
         $this->fetchEntity();
         $this->share();
-
-
-
     }
 
     protected function fetchEntity(){
@@ -49,7 +48,6 @@ abstract class Admin extends Controller
     protected function share(){
         View::share('title', module_config('settings.title'));
         View::share('routePrefix', $this->routePrefix);
-
     }
 
     protected function setRoutePrefix(){
@@ -59,7 +57,6 @@ abstract class Admin extends Controller
     }
 
     protected function setViewPrefix(){
-
         if (module() && !$this->viewPrefix){
             $this->viewPrefix = module().'::';
         }
@@ -74,7 +71,6 @@ abstract class Admin extends Controller
     public function getIndexViewName(){
         return $this->viewPrefix.'admin.index';
     }
-
 
     public function getRules($request, $id=false){
         return [];
@@ -93,7 +89,6 @@ abstract class Admin extends Controller
     }
 
     public function create(){
-
         $entity = $this->getModel();
 
         $this->after($entity);
@@ -114,7 +109,6 @@ abstract class Admin extends Controller
 
     public function edit($id)
     {
-
         $entity = $this->getModel()->findOrFail($id);
 
         View::share('entity', $entity);
@@ -151,13 +145,8 @@ abstract class Admin extends Controller
 
     }
 
-
     protected function after($entity){
         //
     }
 
-
-
-
-   
 }

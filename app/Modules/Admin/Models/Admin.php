@@ -2,9 +2,13 @@
 
 namespace App\Modules\Admin\Models;
 
+use App\Facades\Route;
+use App\Modules\Roles\Models\Modules;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kyslik\ColumnSortable\Sortable;
+use App\Modules\Roles\Models\Roles;
+use Auth;
 
 /**
  * App\Modules\Admin\Models\Admin
@@ -29,7 +33,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -70,4 +74,97 @@ class Admin extends Authenticatable
         return $query;
     }
 
+    public function role(){
+        return $this->belongsTo(Roles::class);
+    }
+
+    public function canRead($slug){
+        $module = Modules::where('slug',$slug)->first();
+
+        if($module){
+            $permission = $this->role->permissions()->where('module_id',$module->id)->first();
+
+            if($permission && $permission->read == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function canCreate(){
+        $module = Modules::where('slug',Route::getModule())->first();
+
+        if($module){
+            $permission = $this->role->permissions()->where('module_id',$module->id)->first();
+
+            if($permission && $permission->create == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function canDelete(){
+        $module = Modules::where('slug',Route::getModule())->first();
+
+        if($module){
+            $permission = $this->role->permissions()->where('module_id',$module->id)->first();
+
+            if($permission && $permission->delete == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function canUpdate(){
+        $module = Modules::where('slug',Route::getModule())->first();
+
+        if($module){
+            $permission = $this->role->permissions()->where('module_id',$module->id)->first();
+
+            if($permission && $permission->update == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function canPublish(){
+        $module = Modules::where('slug',Route::getModule())->first();
+
+        if($module){
+            $permission = $this->role->permissions()->where('module_id',$module->id)->first();
+
+            if($permission && $permission->publish == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+    }
 }

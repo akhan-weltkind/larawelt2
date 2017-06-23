@@ -32,6 +32,10 @@
             @endif
         </div>
 
+        <div class="col-md-6">
+            {!! BootForm::select('role_id', trans('admins::admin.role'), $roles) !!}
+        </div>
+
         <div class="col-md-12">
             {!! BootForm::submit(trans('admin::admin.save')) !!}
         </div>

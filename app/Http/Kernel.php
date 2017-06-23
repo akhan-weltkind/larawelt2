@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Modules\Roles\Http\Middleware\ActionAccess;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -46,20 +47,22 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Modules\Users\Http\Middleware\RedirectIfAuthenticated::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'admin' => \App\Modules\Admin\Http\Middleware\RedirectIfAuthenticated::class,
-        'admin.user' => \App\Modules\Admin\Http\Middleware\DeniedIfNotAdmin::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'auth'          => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest'         => \App\Modules\Users\Http\Middleware\RedirectIfAuthenticated::class,
+        'bindings'      => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'           => \Illuminate\Auth\Middleware\Authorize::class,
+        'admin'         => \App\Modules\Admin\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin.user'    => \App\Modules\Admin\Http\Middleware\DeniedIfNotAdmin::class,
+        'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'page' => \App\Modules\Tree\Http\Middleware\Page::class,
+        'action.access' => ActionAccess::class,
 
-        'breadcrumbs' => \App\Http\Middleware\Breadcrumbs::class,
-        'og' => \App\Http\Middleware\Og::class,
-        'meta' => \App\Http\Middleware\Meta::class
+
+        'page'          => \App\Modules\Tree\Http\Middleware\Page::class,
+        'breadcrumbs'   => \App\Http\Middleware\Breadcrumbs::class,
+        'og'            => \App\Http\Middleware\Og::class,
+        'meta'          => \App\Http\Middleware\Meta::class
     ];
 
 
