@@ -2,7 +2,6 @@
 <html class="no-js" lang="{!! lang() !!}">
 
 <head>
-
     <meta charset="utf-8">
 
     @hasSection('meta-title')
@@ -27,7 +26,6 @@
         <meta property="og:description" content="{{$og->description}}" />
     @endif
 
-
     @if(isset($meta->keywords) && $meta->keywords)
         <meta name="keywords" content="{{$meta->keywords}}" />
     @endif
@@ -51,16 +49,12 @@
     <link href="/favicons/safari-pinned-tab.svg" rel="mask-icon">
     <link href="/favicons/manifest.json" rel="manifest">
 
-
-
-
     <link href="/css/reset.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/modules.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
 
     @stack('css')
-
 
     <script src="/js/jquery-2.2.4.min.js"></script>
     <script src="/js/modernizr.js"></script>
@@ -70,7 +64,6 @@
 <body class="page">
 <!--[if lt IE 9]>
 <p class="browsehappy">@lang('index.old_browser')</p><![endif]-->
-
 
 <div class="page__content">
     <div class="page__wrapper">

@@ -6,8 +6,6 @@ use App\Modules\Tree\Helpers\Breadcrumbs;
 
 class BreadcrumbsComposer
 {
-
-
     public function compose(View $view){
         $view->with('breadcrumbs', Breadcrumbs::all());
     }

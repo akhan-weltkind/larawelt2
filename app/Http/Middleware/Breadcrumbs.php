@@ -22,7 +22,6 @@ class Breadcrumbs
             $ancestors = $page->ancestorsAndSelf()->get();
 
             foreach ($ancestors as $ancestor) {
-
                 if ($ancestor->slug) {
                     $url = route($ancestor->slug);
                 } else {
@@ -30,11 +29,8 @@ class Breadcrumbs
                 }
 
                 Facade::add($ancestor->title, $url);
-
             }
         }
-
-
 
         $entity = $request->get('entity');
 
@@ -42,9 +38,6 @@ class Breadcrumbs
             Facade::add($entity->title, route($page->slug . '.show', ['id' => $entity->id]));
         }
 
-
         return $next($request);
-
-
     }
 }

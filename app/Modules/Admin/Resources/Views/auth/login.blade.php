@@ -53,7 +53,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     Войти
                                 </button>
-
                             </div>
                         </div>
                     </form>

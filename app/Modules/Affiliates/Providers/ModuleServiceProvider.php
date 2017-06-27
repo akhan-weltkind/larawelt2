@@ -2,7 +2,6 @@
 
 namespace App\Modules\Affiliates\Providers;
 
-
 use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider

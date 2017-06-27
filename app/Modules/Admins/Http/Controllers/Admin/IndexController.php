@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Modules\Admins\Http\Controllers\Admin;
+
 use App\Modules\Admin\Models\Admin as Model;
-use View;
 use App\Modules\Admin\Http\Controllers\Admin;
 use App\Modules\Roles\Models\Roles;
 use Illuminate\Support\Facades\Auth;
+use View;
 
 
 class IndexController extends Admin
@@ -21,11 +22,10 @@ class IndexController extends Admin
 
     public function getRules($request, $id = false){
         $rules = [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:admins'.($id?',id,'.$id:''),
-            'password' => 'required|min:6'
+            'name'      => 'required|max:255',
+            'email'     => 'required|email|max:255|unique:admins'.($id?',id,'.$id:''),
+            'password'  => 'required|min:6'
         ];
-
 
         if (isset($request->password) && !$request->password){
             unset($request->password);
@@ -57,9 +57,9 @@ class IndexController extends Admin
         return view(
             $this->getFormViewName(),
             [
-                'entity'=>$entity,
-                'routePrefix'=>$this->routePrefix,
-                'roles'     => Roles::getSelect()
+                'entity'        => $entity,
+                'routePrefix'   => $this->routePrefix,
+                'roles'         => Roles::getSelect()
             ]
         );
     }

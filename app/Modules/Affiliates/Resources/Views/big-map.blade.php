@@ -1,47 +1,44 @@
 @extends('layouts.inner')
 @push('js')
-<script>
-    var map;
-    var infowindow;
-    var markerList = [];
+    <script>
+        var map;
+        var infowindow;
+        var markerList = [];
 
-    function initMap() {
+        function initMap() {
+            var options = {
+                zoom: 11,
+                center: {lat: 42.8749981, lng: 74.6103646},
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            };
+            map = new google.maps.Map(document.getElementById('map'), options);
+            infowindow = new google.maps.InfoWindow();
 
-        var options = {
-            zoom: 11,
-            center: {lat: 42.8749981, lng: 74.6103646},
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-        };
-        map = new google.maps.Map(document.getElementById('map'), options);
-        infowindow = new google.maps.InfoWindow();
-        
-        var items = <?= $items ?>;
-        var marker, i;
+            var items = <?= $items ?>,
+                marker, i;
 
-        for(i = 0; i < items.length; i++) {
+            for(i = 0; i < items.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(items[i][1], items[i][2]),
+                    map: map,
+                    title: items[i][4],
+                    address: items[i][5],
+                    work_time: items[i][6],
+                    work_break: items[i][7]
+                });
 
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(items[i][1], items[i][2]),
-                map: map,
-                title: items[i][4],
-                address: items[i][5],
-                work_time: items[i][6],
-                work_break: items[i][7]
-            });
+                markerList.push(marker);
 
-            markerList.push(marker);
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent($('#aff-'+i).html());
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infowindow.setContent($('#aff-'+i).html());
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
         }
-
-    }
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('googlemaps.key') }}&callback=initMap"></script>
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('googlemaps.key') }}&callback=initMap"></script>
 @endpush
 
 @section('content')

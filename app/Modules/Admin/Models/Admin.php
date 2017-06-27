@@ -51,7 +51,6 @@ class Admin extends Authenticatable
         if ($password){
             $this->attributes['password'] = bcrypt($password);
         }
-
     }
 
     public function scopeAdmin($query)
@@ -74,11 +73,13 @@ class Admin extends Authenticatable
         return $query;
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Roles::class);
     }
 
-    public function canRead($slug){
+    public function canRead($slug)
+    {
         $module = Modules::where('slug',$slug)->first();
 
         if($module){
@@ -96,7 +97,8 @@ class Admin extends Authenticatable
         }
     }
 
-    public function canCreate(){
+    public function canCreate()
+    {
         $module = Modules::where('slug',Route::getModule())->first();
 
         if($module){
@@ -114,7 +116,8 @@ class Admin extends Authenticatable
         }
     }
 
-    public function canDelete(){
+    public function canDelete()
+    {
         $module = Modules::where('slug',Route::getModule())->first();
 
         if($module){
@@ -132,7 +135,8 @@ class Admin extends Authenticatable
         }
     }
 
-    public function canUpdate(){
+    public function canUpdate()
+    {
         $module = Modules::where('slug',Route::getModule())->first();
 
         if($module){
@@ -150,7 +154,8 @@ class Admin extends Authenticatable
         }
     }
 
-    public function canPublish(){
+    public function canPublish()
+    {
         $module = Modules::where('slug',Route::getModule())->first();
 
         if($module){

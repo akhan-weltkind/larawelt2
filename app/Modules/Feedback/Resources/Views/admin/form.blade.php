@@ -7,12 +7,15 @@
 @endsection
 
 @section('title')
-    <h2><a href="{!! URL::route($routePrefix.'index') !!}">{{$title}}</a></h2>
+    <h2>
+        <a href="{!! URL::route($routePrefix.'index') !!}">
+            {{$title}}
+        </a>
+    </h2>
 @endsection
 
 @section('content')
     <div class="panel-body">
-
         <div class="col-md-6">
             <label>@lang('admin::fields.date')</label>
             <p>{{$entity->date}}</p>
@@ -37,6 +40,5 @@
             <label>@lang('admin::fields.message')</label>
             <p>{!! nl2br($entity->message) !!}</p>
         </div>
-
     </div>
 @endsection

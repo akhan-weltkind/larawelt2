@@ -44,7 +44,9 @@ class UserReset extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->from(env('MAIL_USERNAME'))->subject(trans('users::auth.reset_subject') . config('app,name'))->view('users::emails.reset',['token' => $this->token]);
-
+        return (new MailMessage)
+            ->from(env('MAIL_USERNAME'))
+            ->subject(trans('users::auth.reset_subject') . config('app,name'))
+            ->view('users::emails.reset',['token' => $this->token]);
     }
 }

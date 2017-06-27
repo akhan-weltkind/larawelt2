@@ -14,7 +14,6 @@
             <td>{{ $entity->name }}</td>
             <td>{{ $entity->email }}</td>
             <td>
-
                 @include('admin::common.controls.edit', ['routePrefix'=>$routePrefix, 'id'=>$entity->id])
 
                 @if (Auth::guard('admin')->user()->id != $entity->id)

@@ -15,7 +15,6 @@ class FacadesServiceProvider extends ServiceProvider {
             return new \App\Helpers\Uploader;
         });
 
-
         $this->app->singleton('bootstrap_form_new', function($app) {
             return new \App\Helpers\BootstrapForm($app['html'], $app['form'], $app['config']);
         });

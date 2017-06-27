@@ -18,10 +18,8 @@ class Og
      */
     public function handle($request, Closure $next)
     {
-
-        $og = [];
-
-        $siteName = Widget::get('title');
+        $og         = [];
+        $siteName   = Widget::get('title');
 
         if (!$siteName) {
             $siteName = config('app.name');
@@ -31,11 +29,10 @@ class Og
             $og['site_name'] = $siteName;
         }
 
+        $entity     = Request::getFacadeRoot()->get('entity');
+        $page       = Request::getFacadeRoot()->get('page');
+        $ogImage    = false;
 
-        $entity = Request::getFacadeRoot()->get('entity');
-        $page = Request::getFacadeRoot()->get('page');
-
-        $ogImage = false;
         if ($entity) {
             if (@$entity->image_full) {
                 $ogImage = host() . $entity->image_full;
@@ -47,7 +44,6 @@ class Og
             if (!$ogImage && @$entity->content) {
                 $ogImage = $this->getImageFromContent($entity->content);
             }
-
         }
 
         if (!$ogImage) {
@@ -58,11 +54,9 @@ class Og
             $og['image'] = $ogImage;
         }
 
-
         $ogTitle = false;
 
         if ($entity) {
-
             if (@$entity->meta_title) {
                 $ogTitle = $entity->meta_title;
             }
@@ -70,7 +64,6 @@ class Og
             if (!$ogTitle && @$entity->title) {
                 $ogTitle = $entity->title;
             }
-
         }
 
         if ($page){
@@ -83,8 +76,6 @@ class Og
             }
         }
 
-
-
         if (!$ogTitle){
             $ogTitle = $siteName;
         }
@@ -93,12 +84,9 @@ class Og
             $og['title'] = $ogTitle;
         }
 
-
-
         $ogDescription = false;
 
         if ($entity) {
-
             if (@$entity->meta_description) {
                 $ogDescription = $entity->meta_description;
             }
@@ -118,7 +106,6 @@ class Og
             if (!$ogDescription && @$entity->content) {
                 $ogDescription = $this->cleanContent($entity->content, 150);
             }
-
         }
 
         if ($page){
@@ -131,39 +118,33 @@ class Og
             }
         }
 
-
         if ($ogDescription){
             $og['description'] = $ogDescription;
         }
 
         View::share('og', (object)$og);
 
-
-
-
         return $next($request);
-
     }
-
 
     protected function getImageFromContent($html)
     {
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
 
-        $tags = $doc->getElementsByTagName('img');
+        $tags   = $doc->getElementsByTagName('img');
         $images = array();
+
         foreach ($tags as $tag) {
             $images[] = $tag->getAttribute('src');
         }
 
-
         if (empty($images)) {
             return false;
-
         }
 
         $image = $images[0];
+
         if (strpos($image, host_protocol()) !== false) {
             return $image;
         } else {
@@ -172,10 +153,18 @@ class Og
     }
 
     protected function cleanContent($content, $length){
-
-      return trim(preg_replace('/&#?[a-z0-9]+;/i', '', str_limit(preg_replace('/\r|\n/', ' ', strip_tags($content)), $length)));
-
+      return trim(
+          preg_replace(
+              '/&#?[a-z0-9]+;/i',
+              '',
+              str_limit(
+                  preg_replace(
+                      '/\r|\n/', ' ',
+                      strip_tags($content)
+                  ),
+                  $length
+              )
+          )
+      );
     }
-
-
 }

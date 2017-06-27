@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/regions', function (Request $request) {
-    // return $request->news();
+Route::get('/affiliates', function (Request $request) {
+    // return $request->affiliates();
 })->middleware('auth:api');

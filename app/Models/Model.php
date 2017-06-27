@@ -29,40 +29,31 @@ class Model extends ParentModel
             with(new static)->beforeSave($model);
         });
 
-
         with(new static)->addGlobalScopes();
-
-
     }
-
 
     protected function addGlobalScopes()
     {
-
         if (Schema::hasColumn(self::getTableStatic(), 'lang')) {
             static::addGlobalScope('lang', function (Builder $builder) {
                 $builder->where('lang', '=', lang());
             });
         }
-
     }
 
     protected function beforeCreate($model)
     {
-
         $columns = Schema::getColumnListing($model->getTable());
 
         if (in_array('lang', $columns)) {
             $model->lang = lang();
         }
-
     }
 
     protected function beforeSave($model)
     {
 
     }
-
 
     public function scopeAdmin($query)
     {
@@ -83,6 +74,4 @@ class Model extends ParentModel
     {
         return $query;
     }
-
-
 }

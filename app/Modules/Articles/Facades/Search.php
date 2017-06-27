@@ -18,7 +18,15 @@ class Search extends BaseSearch
             ->where(
                 $this->getSearchSqlWhere(
                     $this->getQuery(),
-                    array('title', 'preview', 'content','meta_h1', 'meta_title', 'meta_keywords', 'meta_description')
+                    [
+                        'title',
+                        'preview',
+                        'content',
+                        'meta_h1',
+                        'meta_title',
+                        'meta_keywords',
+                        'meta_description'
+                    ]
                 ))
             ->where('active', 1)
             ->where('lang', \Lang::locale())

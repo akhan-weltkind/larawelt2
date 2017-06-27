@@ -19,22 +19,31 @@ class ActionAccess
      */
     public function handle($request, Closure $next, $guard = 'admin')
     {
-
         $module = Route::getModule();
 
         if ($module != 'admin'){
             switch (action()){
                 case 'index':
-                    $moduleId = Modules::where('slug',$module)->first()->id;
-                    $permission = Auth::guard('admin')->user()->role->permissions()->where('permissions.module_id',$moduleId)->first();
+                    $moduleId   = Modules::where('slug',$module)->first()->id;
+                    $permission = Auth::guard('admin')
+                        ->user()
+                        ->role
+                        ->permissions()
+                        ->where('permissions.module_id',$moduleId)
+                        ->first();
 
                     if (!$permission->read){
                         return redirect()->back()->with(['message' => trans('roles::admin.access.denied')]);
                     }
                     break;
                 case 'create':
-                    $moduleId = Modules::where('slug',$module)->first()->id;
-                    $permission = Auth::guard('admin')->user()->role->permissions()->where('permissions.module_id',$moduleId)->first();
+                    $moduleId   = Modules::where('slug',$module)->first()->id;
+                    $permission = Auth::guard('admin')
+                        ->user()
+                        ->role
+                        ->permissions()
+                        ->where('permissions.module_id',$moduleId)
+                        ->first();
 
                     if (!$permission->create){
                         return redirect()->back()->with(['message' => trans('roles::admin.access.denied')]);

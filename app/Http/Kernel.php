@@ -58,13 +58,11 @@ class Kernel extends HttpKernel
 
         'action.access' => ActionAccess::class,
 
-
         'page'          => \App\Modules\Tree\Http\Middleware\Page::class,
         'breadcrumbs'   => \App\Http\Middleware\Breadcrumbs::class,
         'og'            => \App\Http\Middleware\Og::class,
         'meta'          => \App\Http\Middleware\Meta::class
     ];
-
 
     use \Xannn94\Localization\Traits\LocalizationKernelTrait;
 }

@@ -16,11 +16,9 @@ class IndexController extends Controller
 
     }
 
-    public function robots(){
-        $content = file( $_SERVER['DOCUMENT_ROOT'].'/robots/robots.txt' );
-
+    public function robots()
+    {
         config(['app.debug' => true]);
-
 
         if ( config('cms.indexation') ) {
             $content = file( $_SERVER['DOCUMENT_ROOT'].'/robots/robots.txt' );
@@ -28,27 +26,25 @@ class IndexController extends Controller
         }
         else {
             return response()->view('sitemap::robots-disallow')->header('Content-Type','text/plain');
-
         }
-
     }
 
     public function index()
     {
-        $locales = config('localization.supported-locales');
-        $result = null;
-        $cacheId = 'sitemap';
-        $cached = Cache::store('file')->get($cacheId);
-        $locs = [];
+        $locales    = config('localization.supported-locales');
+        $result     = null;
+        $cacheId    = 'sitemap';
+        $cached     = Cache::store('file')->get($cacheId);
+        $locs       = [];
+
         if($cached) {
             $responce = new Response();
             return $responce->setContent($cached)->header('Content-Type', 'text/xml');
         } else {
             foreach ($locales as $locale) {
-
-                $limit = module_config('settings.limit');
-                $tmp = [];
-                $modules = Module::all();
+                $limit      = module_config('settings.limit');
+                $tmp        = [];
+                $modules    = Module::all();
 
                 foreach ($modules as $module) {
                     $searchName = '\\App\\Modules\\' . $module['basename'] . '\\Facades\\Sitemap';
@@ -57,9 +53,8 @@ class IndexController extends Controller
                         continue;
                     }
 
-                    $searchModule = new $searchName($module['basename']);
-                    $tmp[] = $searchModule->getRootLocs($limit,$locale);
-
+                    $searchModule   = new $searchName($module['basename']);
+                    $tmp[]          = $searchModule->getRootLocs($limit,$locale);
                 }
 
                 if (empty($tmp)) {
@@ -75,8 +70,6 @@ class IndexController extends Controller
                         $locs[] = $l;
                     }
                 }
-
-
             }
         }
 
@@ -87,7 +80,8 @@ class IndexController extends Controller
         return $cached;
     }
 
-    public function mod(){
+    public function mod()
+    {
         $modules    = [];
         $module     = Request::route('mod');
         $limit      = module_config('settings.limit');
@@ -112,14 +106,13 @@ class IndexController extends Controller
             abort(404);
         }
 
-
         $cacheId = 'sitemap' . \Lang::locale(). $module . $offset;
         $cached  = Cache::store('file')->get($cacheId);
 
         if ( !$cached ) {
-            $offset                 = ( $offset - 1 ) * $limit;
-            $searchName             = 'App\Modules\\' . $module . '\Facades\Sitemap';
-            $searchModule           = new $searchName( $module );
+            $offset         = ( $offset - 1 ) * $limit;
+            $searchName     = 'App\Modules\\' . $module . '\Facades\Sitemap';
+            $searchModule   = new $searchName( $module );
 
             if ($module=='Tree') {
                 $params['root'] = true;
@@ -127,8 +120,7 @@ class IndexController extends Controller
             }
 
             $params['locs'] = $searchModule->getLocs( $limit, $offset );
-
-            $cached = response()->view('sitemap::map', ['params' => $params])->header('Content-Type', 'text/xml');
+            $cached         = response()->view('sitemap::map', ['params' => $params])->header('Content-Type', 'text/xml');
 
             Cache::store('file')->put($cacheId,$cached->getContent(),60);
 

@@ -15,15 +15,12 @@ abstract class ModuleProvider extends ServiceProvider
      * @return void
      */
 
-
     protected function getDir(){
         return app_path().'/Modules/'.ucfirst($this->module);
     }
 
-
     public function boot()
     {
-
         if (!$this->module){
             return false;
         }
@@ -35,7 +32,6 @@ abstract class ModuleProvider extends ServiceProvider
 
     protected function bootConfig($module){
 
-
         $files = array_diff(scandir( $this->getDir().'/Config'), array('.','..'));
         if (empty($files)){
             return false;
@@ -46,9 +42,4 @@ abstract class ModuleProvider extends ServiceProvider
         }
 
     }
-
-
-
-
-
 }

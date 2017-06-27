@@ -9,5 +9,4 @@ return[
             'slug'  => 'gallery'
         ]
     ]
-
 ];

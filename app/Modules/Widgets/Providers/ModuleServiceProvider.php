@@ -6,7 +6,6 @@ use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider
 {
-
     public $module = 'widgets';
 
     /**
@@ -18,6 +17,4 @@ class ModuleServiceProvider extends ModuleProvider
     {
         $this->app->register(RouteServiceProvider::class);
     }
-
-
 }

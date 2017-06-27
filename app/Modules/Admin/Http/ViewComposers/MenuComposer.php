@@ -7,16 +7,11 @@ use Xannn94\Modules\Facades\Module;
 
 class MenuComposer
 {
-
-
     public function compose(View $view = null)
     {
-
-        $modules = Module::all();
-
-        $groups = [];
-        $items = [];
-
+        $modules    = Module::all();
+        $groups     = [];
+        $items      = [];
 
         if (empty($modules)) {
             return;
@@ -32,7 +27,6 @@ class MenuComposer
             if (isset($config['items'])) {
                 $items = array_merge($items, $config['items']);
             }
-
         }
 
         if (empty($groups)){
@@ -51,7 +45,6 @@ class MenuComposer
             $count = 0;
             foreach ($items as $item) {
                 $admin = Auth::guard('admin')->user();
-
 
                 if ($item['group'] == $group['slug'] && $admin->canRead($item['slug'])){
                     $group['items'][] = $item;

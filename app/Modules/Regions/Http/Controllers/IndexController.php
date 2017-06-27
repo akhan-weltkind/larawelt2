@@ -7,12 +7,8 @@ use App\Modules\Regions\Models\Regions;
 
 class IndexController extends Controller
 {
-
-
     public function getModel()
     {
         return new Regions;
     }
-
-
 }

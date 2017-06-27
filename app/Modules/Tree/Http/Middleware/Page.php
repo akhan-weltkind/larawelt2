@@ -20,8 +20,8 @@ class Page
     public function handle($request, Closure $next)
     {
 
-        $route = Route::currentRouteName();
-        $page = false;
+        $route  = Route::currentRouteName();
+        $page   = false;
 
         if ($route) {
             if (strstr($route, '.')) {
@@ -41,7 +41,6 @@ class Page
             View::share('page', $page);
 
         }
-
 
         return $next($request);
     }

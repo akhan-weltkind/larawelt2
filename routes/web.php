@@ -5,7 +5,6 @@ try {
     Route::localizedGroup(function () {
         Route::group(['middleware' => ['page','meta']], function () {
             foreach (Tree::getRoutes() as $route) {
-
                 if (!$route->module) {
                     Route::get($route->url, '\App\Modules\Tree\Http\Controllers\IndexController@index')->name($route->slug);
                 } else {
@@ -15,7 +14,6 @@ try {
                     Route::get($route->url . '/{id}', '\App\Modules\\' . $module . '\Http\Controllers\IndexController@show')->name($route->slug . '.show');
                 }
             }
-
         });
     });
 }

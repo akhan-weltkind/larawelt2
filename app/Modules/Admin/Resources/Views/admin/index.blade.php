@@ -10,14 +10,11 @@
             });
         });
     </script>
-
 @endpush
-
 
 @section('title')
     <h2>{{$title}}</h2>
 @endsection
-
 
 @section('content')
     @yield('filters')
@@ -27,17 +24,16 @@
     @if (count($entities) > 0)
         <table class="table table-bordered table-hover">
             <thead>
-            <tr>
-                @yield('th')
-            </tr>
+                <tr>
+                    @yield('th')
+                </tr>
             </thead>
             <tbody>
-            @yield('td')
+                @yield('td')
             </tbody>
         </table>
 
         {!! $entities->appends(\Request::except('page'))->render() !!}
-
     @else
         <p>@lang('admin::admin.no_records')</p>
     @endif

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Gallery\Models;
 
 use App\Models\Model;
@@ -8,19 +9,17 @@ use App\Models\Image as Img;
 
 class Gallery extends Model
 {
-
     use Notifiable, Sortable, Img;
 
     protected $table = 'gallery';
 
-
-    public function scopeOrder($query){
-
+    public function scopeOrder($query)
+    {
         return $query->orderBy('priority', 'desc')->orderBy('date', 'desc');
     }
 
-
-    public function images() {
+    public function images()
+    {
         return $this->hasMany("App\Modules\Gallery\Models\Image", 'parent_id', 'id');
     }
 
@@ -44,7 +43,6 @@ class Gallery extends Model
         $this->{'preview_' . lang()} = $value;
     }
 
-
     public function getContentAttribute()
     {
         return $this->{'content_' . lang()};
@@ -54,8 +52,4 @@ class Gallery extends Model
     {
         $this->{'content_' . lang()} = $value;
     }
-
-
-
-
 }

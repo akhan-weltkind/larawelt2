@@ -5,17 +5,16 @@ use App\Modules\Sitemap\Sitemap as BaseSitemap;
 use App\Modules\Tree\Models\Tree as ModelTree;
 class Sitemap extends BaseSitemap {
 
-    public function getLocs( $limit, $offset ) {
+    public function getLocs( $limit, $offset )
+    {
         $attributes = $this->model->first()->getAttributes();
-        $res = null;
+        $res        = null;
 
         if ( is_array($attributes) ) {
-
             if ( array_key_exists($this->activeField,$attributes) ) {
                 $tree = new ModelTree();
-                $res = $tree->all();
+                $res  = $tree->all();
             }
-
         }
 
         $result = array();
@@ -27,8 +26,8 @@ class Sitemap extends BaseSitemap {
         return $result;
     }
 
-    public function getUrl( $row ) {
-
+    public function getUrl( $row )
+    {
         if ($row->slug=='' && !$row->depth && $row->lang == config('localization.default')) {
             return false;
         }
@@ -39,6 +38,5 @@ class Sitemap extends BaseSitemap {
         else{
             return url( $row->slug );
         }
-
     }
 }

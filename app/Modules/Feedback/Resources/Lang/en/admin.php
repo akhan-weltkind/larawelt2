@@ -1,5 +1,4 @@
 <?php
 return[
-    'title'=>'Feedback',
-
+    'title' => 'Feedback',
 ];

@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\View;
 use App\Modules\Roles\Models\Roles;
 use Illuminate\Http\Request;
 
-
-
 class IndexController extends Admin
 {
     /* тут должен быть slug модуля для правильной работы меню */
@@ -18,16 +16,20 @@ class IndexController extends Admin
     /* тут должен быть slug группы для правильной работы меню */
     public $pageGroup = 'users';
 
-    public function getModel(){
+    public function getModel()
+    {
         return new Roles();
     }
 
     public function getRules($request, $id = false)
     {
-        return  ['title' => 'sometimes|required'];
+        return  [
+            'title' => 'sometimes|required'
+        ];
     }
 
-    public function create(){
+    public function create()
+    {
         $entity     = $this->getModel();
         $modules    = Modules::all();
 
@@ -39,8 +41,8 @@ class IndexController extends Admin
         ]);
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $this->validate($request, $this->getRules($request));
 
         $entity = $this->getModel()->create(
@@ -58,7 +60,9 @@ class IndexController extends Admin
 
         $this->after($entity);
 
-        return redirect()->route($this->routePrefix.'edit', ['id'=>$entity->id])->with('message', trans($this->messages['store']));
+        return redirect()
+            ->route($this->routePrefix.'edit', ['id'=>$entity->id])
+            ->with('message', trans($this->messages['store']));
     }
 
     public function edit($id)
@@ -75,11 +79,10 @@ class IndexController extends Admin
             'routePrefix'   => $this->routePrefix,
             'modules'       => $modules
         ]);
-
     }
 
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id)
+    {
         $this->validate($request, $this->getRules($request, $id));
 
         $entity = $this->getModel()->findOrFail($id);
@@ -89,11 +92,10 @@ class IndexController extends Admin
         $this->after($entity);
 
         return redirect()->back()->with('message', trans($this->messages['update']));
-
     }
 
-    public function destroy($id){
-
+    public function destroy($id)
+    {
         $entity         = $this->getModel()->find($id);
         $permissions    = $entity->permissions()->get();
 
@@ -110,10 +112,10 @@ class IndexController extends Admin
         $this->after($entity);
 
         return redirect()->back()->with('message', trans($this->messages['destroy']));
-
     }
 
-    public function refreshModules(){
+    public function refreshModules()
+    {
         $newModules = 0;
         $newTitle   = 0;
 
@@ -129,6 +131,7 @@ class IndexController extends Admin
 
             if($condition){
                 $items  = config('modules.items.' .$key.'.menu.items');
+
                 foreach ($items as $item){
                     $slug   = $item['slug'];
                     $title  = $item['title'];
@@ -167,57 +170,56 @@ class IndexController extends Admin
         }
 
         return redirect()->back()->with([
-            'message' => 'Модули успешно обновлены.<br> Добавлено: ' .$newModules. ' модуль(ей). <br> Переименовано: ' .$newTitle. ' модуль(ей).'
+            'message' =>
+                'Модули успешно обновлены.<br> Добавлено: '.
+                $newModules.
+                ' модуль(ей). <br> Переименовано: '.
+                $newTitle.
+                ' модуль(ей).'
         ]);
     }
 
-    private function deleteOldModules(){
-
+    private function deleteOldModules()
+    {
         $modules = Modules::all();
 
         $modules->each(
             function ($item){
-            $slugs  = [];
-            foreach (config('modules.items') as $key => $value) {
-                $condition = (
-                    isset($value['settings']) &&
-                    isset($value['menu']) &&
-                    isset($value['settings']['in_roles']) &&
-                    $value['settings']['in_roles'] = 1
-                );
+                $slugs  = [];
 
-                if($condition){
-                    foreach (config('modules.items.' .$key.'.menu.items') as $menuItem){
-                            $slugs[$menuItem['slug']] = 1;
+                foreach (config('modules.items') as $key => $value) {
+                    $condition = (
+                        isset($value['settings']) &&
+                        isset($value['menu']) &&
+                        isset($value['settings']['in_roles']) &&
+                        $value['settings']['in_roles'] = 1
+                    );
+
+                    if($condition){
+                        foreach (config('modules.items.' .$key.'.menu.items') as $menuItem){
+                                $slugs[$menuItem['slug']] = 1;
+                        }
                     }
                 }
-            }
 
-            if(!array_key_exists($item->slug,$slugs)){
-                $roles  = Roles::all();
-                $module = Modules::where('slug',$item->slug)->first();
+                if(!array_key_exists($item->slug,$slugs)){
+                    $roles  = Roles::all();
+                    $module = Modules::where('slug',$item->slug)->first();
 
-                foreach ($roles as $role){
+                    foreach ($roles as $role){
+                        $permissions = $role->permissions()->get();
 
-                    $permissions = $role->permissions()->get();
-
-                    if($permissions){
-
-                        foreach ($permissions as $permission){
-                            if($module && $module->slug === $item->slug && $module->id == $permission->module_id){
-
-                                $role->permissions()->detach($permission->id);
-                                $permission->delete();
+                        if($permissions){
+                            foreach ($permissions as $permission){
+                                if($module && $module->slug === $item->slug && $module->id == $permission->module_id){
+                                    $role->permissions()->detach($permission->id);
+                                    $permission->delete();
+                                }
                             }
                         }
                     }
-
+                    $item->delete();
                 }
-
-                $item->delete();
-            }
         });
     }
-
-
 }

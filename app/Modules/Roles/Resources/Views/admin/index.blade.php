@@ -20,13 +20,9 @@
 
 @section('td')
     @foreach ($entities as $entity)
-        {{--Если у вас по логике есть поле опубликовать(active), то используйте следующий код--}}
-        {{--<tr @if (!$entity->active) class="unpublished" @endif>--}}
-        {{--Если поля опубликовать(active) нету, то используйте следующий код--}}
-        {{--<tr>--}}
-        <tr>
-            {{--Пример как заполнять таблицу--}}
+        <tr @if (!$entity->active) class="unpublished" @endif>
              <td>{{ $entity->title }}</td>
+
             @if($entity->id !=1 )
                 <td class="controls">@include ('admin::common.controls.all', ['routePrefix'=>$routePrefix, 'id'=>$entity->id])</td>
             @endif

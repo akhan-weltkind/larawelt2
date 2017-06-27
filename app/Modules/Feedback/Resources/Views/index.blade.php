@@ -2,32 +2,28 @@
 
 @push('js')
 @verbatim
-<script type="text/javascript">
-    function initMap() {
-        var myLatLng = {lat: <?=Settings::get('lat')?:0?>, lng: <?=Settings::get('lng')?:0?>};
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            scrollwheel: false,
-            zoom: <?=Settings::get('zoom')?:8?>,
-            center: myLatLng
-        });
-
-
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map
-        });
-    }
-
-</script>
+    <script type="text/javascript">
+        function initMap() {
+            var myLatLng = {lat: <?=Settings::get('lat')?:0?>, lng: <?=Settings::get('lng')?:0?>};,
+                map = new google.maps.Map(document.getElementById('map'), {
+                    scrollwheel: false,
+                    zoom: <?=Settings::get('zoom')?:8?>,
+                    center: myLatLng
+                }),
+                marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map
+                });
+        }
+    </script>
 @endverbatim
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=<?=config('googlemaps.key')?>&callback=initMap"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<?=config('googlemaps.key')?>&callback=initMap">
+    </script>
 @endpush
 
 @section('content')
     <div class="feedback">
-
         <div class="row">
             <div class="col-md-6">
                 <div class="feedback__left">

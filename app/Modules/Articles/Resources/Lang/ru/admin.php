@@ -1,4 +1,4 @@
 <?php
 return[
-    'title'=>'Статьи'
+    'title' => 'Статьи'
 ];

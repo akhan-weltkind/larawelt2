@@ -94,7 +94,7 @@ $style = [
                                         @lang('users::auth.hello'), {{$user->name}}!
                                     </h1>
 
-                                    <!-- Intro -->
+                                        <!-- Intro -->
                                         <p style="{{ $style['paragraph'] }}">
                                             @lang('users::auth.thankRegister').
                                         </p>
@@ -102,8 +102,7 @@ $style = [
                                             @lang('users::auth.clickButton'):
                                         </p>
 
-
-                                <!-- Action Button -->
+                                        <!-- Action Button -->
                                         <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="center">
@@ -117,25 +116,25 @@ $style = [
                                             </tr>
                                         </table>
 
-                                <!-- Salutation -->
+                                    <!-- Salutation -->
                                     <p style="{{ $style['paragraph'] }}">
                                         @lang('users::auth.signature')
                                     </p>
-                                        <table style="{{ $style['body_sub'] }}">
-                                            <tr>
-                                                <td style="{{ $fontFamily }}">
-                                                    <p style="{{ $style['paragraph-sub'] }}">
-                                                       @lang('users::auth.activeButtonProblem'):
-                                                    </p>
+                                    <table style="{{ $style['body_sub'] }}">
+                                        <tr>
+                                            <td style="{{ $fontFamily }}">
+                                                <p style="{{ $style['paragraph-sub'] }}">
+                                                   @lang('users::auth.activeButtonProblem'):
+                                                </p>
 
-                                                    <p style="{{ $style['paragraph-sub'] }}">
-                                                        <a style="{{ $style['anchor'] }}" href="{{ URL::route('user.confirm',$user->token) }}" target="_blank">
-                                                            {{ URL::route('user.confirm',$user->token) }}
-                                                        </a>
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                                <p style="{{ $style['paragraph-sub'] }}">
+                                                    <a style="{{ $style['anchor'] }}" href="{{ URL::route('user.confirm',$user->token) }}" target="_blank">
+                                                        {{ URL::route('user.confirm',$user->token) }}
+                                                    </a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>

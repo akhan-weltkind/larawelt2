@@ -15,8 +15,4 @@ return [
     */
 
     'key'       => 'AIzaSyA51CRRlkDOAZ_1wEcIsfm4hbLqD6stGmU',
-
-
-
-
 ];

@@ -24,7 +24,8 @@ class UserRegistered extends Mailable
 
     public function build()
     {
-        return $this->from(env('MAIL_USERNAME'))->subject(trans('users::auth.confirm_subject') . config('app,name'))
+        return $this->from(env('MAIL_USERNAME'))
+            ->subject(trans('users::auth.confirm_subject') . config('app,name'))
             ->view('users::emails.confirm');
     }
 }

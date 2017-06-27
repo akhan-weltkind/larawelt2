@@ -7,19 +7,19 @@ use Illuminate\Notifications\Notifiable;
 
 class Feedback extends Model
 {
-
     use Notifiable, Sortable;
 
-    protected $fillable = ['date','email', 'name', 'message', 'ip'];
+    protected $fillable = [
+        'date','email', 'name', 'message', 'ip'
+    ];
 
-    public function imagePrefixPath(){
+    public function imagePrefixPath()
+    {
         return '/uploads/reviews/';
     }
 
-
-    public function scopeOrder($query){
+    public function scopeOrder($query)
+    {
         return $query->orderBy('date', 'desc');
     }
-
-
 }

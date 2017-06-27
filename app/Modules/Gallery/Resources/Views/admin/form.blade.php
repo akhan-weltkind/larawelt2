@@ -2,8 +2,15 @@
 
 @section('form_content')
 
-    {!! BootForm::open(['model' => $entity, 'store' => $routePrefix.'store', 'update' => $routePrefix.'update', 'autocomplete' => 'off',
-   'files' => true]) !!}
+    {!!
+        BootForm::open([
+            'model'         => $entity,
+            'store'         => $routePrefix.'store',
+            'update'        => $routePrefix.'update',
+            'autocomplete'  => 'off',
+            'files'         => true
+        ])
+    !!}
 
     <div class="col-md-6">
         {!! BootForm::text('title', trans('admin::fields.title')) !!}
@@ -22,18 +29,14 @@
         {!! BootForm::text('priority', trans('admin::fields.priority')) !!}
     </div>
 
-
     <div class="col-md-12">
         {!! BootForm::textarea('preview', trans('admin::fields.preview'), null, ['rows'=>'5']) !!}
     </div>
-
 
     <div class="col-md-12">
         {!! BootForm::textarea('content', trans('admin::fields.content'), null) !!}
         <div class="clearfix"></div>
     </div>
-
-
 
     <div class="col-md-12">
         @include('admin::images.form', ['id'=>$entity->id, 'routePrefix'=>$routePrefix.'images.'])

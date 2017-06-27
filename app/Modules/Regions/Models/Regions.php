@@ -7,12 +7,9 @@ use Illuminate\Notifications\Notifiable;
 
 class Regions extends Model
 {
-
     use Notifiable, Sortable;
 
-
     public function scopeOrder($query){
-
         return $query->orderBy('priority','desc');
     }
 }

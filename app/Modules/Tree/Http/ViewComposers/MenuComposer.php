@@ -6,13 +6,10 @@ use App\Modules\Tree\Models\TreeRepository;
 
 class MenuComposer
 {
-
     protected $repository;
 
     public function __construct(TreeRepository $repository){
         $this->repository = $repository;
-
-
     }
 
     public function compose(View $view){

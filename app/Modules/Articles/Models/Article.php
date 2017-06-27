@@ -9,18 +9,14 @@ use App\Models\Filters;
 
 class Article extends Model
 {
-
     use Notifiable, Sortable, Image, Filters;
 
     public $filters = [
         'title'=> ['title', 'LIKE', '%?%']
     ];
 
-    public function scopeOrder($query){
-
+    public function scopeOrder($query)
+    {
         return $query->orderBy('priority', 'desc')->orderBy('date', 'desc');
     }
-
-
-
 }

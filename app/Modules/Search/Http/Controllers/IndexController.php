@@ -42,8 +42,10 @@ class IndexController extends Controller
         }
 
         $queries = explode(' ', $query);
+
         foreach ($queries as $num => $q) {
             $q = trim($q);
+
             if (mb_strlen($q) < 3) {
                 unset($queries[$num]);
             } else {
@@ -59,30 +61,32 @@ class IndexController extends Controller
         }
 
         if (!$this->_isAllowed($request->ip())) {
-            $validator->errors()->add('query', trans('search::index.errors.timeout', ['seconds' => module_config('settings.timeout')]));
+            $validator->errors()->add(
+                'query',
+                trans('search::index.errors.timeout', ['seconds' => module_config('settings.timeout')])
+            );
             return view('search::message')->withErrors($validator);
         }
 
-        $modules = Module::all();
-        $result = [];
+        $modules    = Module::all();
+        $result     = [];
 
         foreach ($modules as $module) {
             if (file_exists(app_path() . '/Modules/' . $module['basename'] . '/Facades/Search.php')) {
-                $className = 'App\Modules\\' . $module['basename'] . '\Facades\Search';
-                $searchClass = new $className;
+                $className      = 'App\Modules\\' . $module['basename'] . '\Facades\Search';
+                $searchClass    = new $className;
                 $searchClass->setQuery($query);
                 $searchClass->setResultArray($result);
                 $result = $searchClass->getResult();
             }
         }
 
-        $statistics = new StatisticsSearchWord;
-
-        $statistics->date = date('Y-m-d H:i:s');
-        $statistics->lang = \Lang::locale();
-        $statistics->ip = ip2long($request->ip());
-        $statistics->query = $query;
-        $statistics->results = SearchAbstract::$total;
+        $statistics             = new StatisticsSearchWord;
+        $statistics->date       = date('Y-m-d H:i:s');
+        $statistics->lang       = \Lang::locale();
+        $statistics->ip         = ip2long($request->ip());
+        $statistics->query      = $query;
+        $statistics->results    = SearchAbstract::$total;
 
         $statistics->save();
 

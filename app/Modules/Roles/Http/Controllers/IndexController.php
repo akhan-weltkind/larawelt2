@@ -7,12 +7,8 @@ use App\Modules\Roles\Models\Roles;
 
 class IndexController extends Controller
 {
-
-
     public function getModel()
     {
         return new Roles;
     }
-
-
 }

@@ -7,12 +7,10 @@ use Illuminate\Notifications\Notifiable;
 
 class Affiliates extends Model
 {
-
     use Notifiable, Sortable;
 
-
-    public function scopeOrder($query){
-
+    public function scopeOrder($query)
+    {
         return $query->orderBy('priority','desc')->orderBy('created_at','desc');
     }
 }

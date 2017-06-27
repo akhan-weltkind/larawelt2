@@ -6,11 +6,8 @@ use Xannn94\Modules\Facades\Module;
 
 class LanguagesComposer
 {
-
-
     public function compose(View $view)
     {
-
         if (action()!='index'){
             return;
         }
@@ -21,12 +18,9 @@ class LanguagesComposer
             return;
         }
 
-
         if (isset($config['localization']) && $config['localization'] == true){
             $locales = localization()->getSupportedLocales();
             $view->with('supportedLocales', $locales);
         }
-
-
     }
 }

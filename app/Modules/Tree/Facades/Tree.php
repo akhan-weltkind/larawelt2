@@ -11,6 +11,6 @@ class Tree extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return 'tree_repository'; // the IoC binding.
+        return 'tree_repository';
     }
 }

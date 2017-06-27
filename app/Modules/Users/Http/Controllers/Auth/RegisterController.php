@@ -35,6 +35,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+
     /**
      * Create a new controller instance.
      *
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'captcha'   => 'required|captcha',
         ];
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -82,6 +84,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, $this->getRules(),$this->getMessagesRules());
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -107,7 +110,6 @@ class RegisterController extends Controller
         Breadcrumbs::add('Главная', home());
         Breadcrumbs::add('Регистрация', route('user.register'));
 
-
         return view('users::auth.register');
     }
 
@@ -119,7 +121,6 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         $user = User::create($request->all());

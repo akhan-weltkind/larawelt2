@@ -8,14 +8,14 @@ return[
     'workTime'  => 'Время работы',
     'workBreak' => 'Перерыв',
     'lookOnMap' => 'Смотреть на карте',
-    'admin' => [
+    'admin'     => [
         'title'     => 'Филиалы',
         'fields'    => [
             'phone'     => 'Телефон',
             'address'   => 'Адрес',
-            'region'   => 'Регион',
-            'workTime'   => 'Время работы',
-            'workBreak'   => 'Перерыв',
+            'region'    => 'Регион',
+            'workTime'  => 'Время работы',
+            'workBreak' => 'Перерыв',
         ]
     ]
 

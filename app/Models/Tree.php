@@ -24,7 +24,6 @@ class Tree extends \Baum\Node{
     // guard attributes from mass-assignment
     protected $guarded = array('id', 'parent_id', 'lidx', 'ridx', 'depth');
 
-
     public static function getTableStatic()
     {
         return with(new static)->getTable();
@@ -47,10 +46,8 @@ class Tree extends \Baum\Node{
 
     }
 
-
     protected function addGlobalScopes()
     {
-
         if (Schema::hasColumn(self::getTableStatic(), 'lang')) {
             static::addGlobalScope('lang', function (Builder $builder) {
                 $builder->where('lang', '=', lang());
@@ -61,20 +58,17 @@ class Tree extends \Baum\Node{
 
     protected static function beforeCreate($model)
     {
-
         $columns = Schema::getColumnListing($model->getTable());
 
         if (in_array('lang', $columns)) {
             $model->lang = lang();
         }
-
     }
 
     protected static function beforeSave($model)
     {
 
     }
-
 
     public function scopeAdmin($query)
     {

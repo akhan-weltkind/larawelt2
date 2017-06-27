@@ -1,6 +1,6 @@
 <?php
 return[
-    'title'     =>'Affiliates',
+    'title'     => 'Affiliates',
     'oneTitle'  => 'Affiliate',
     'phone'     => 'Phone',
     'address'   => 'Address',
@@ -8,14 +8,14 @@ return[
     'workTime'  => 'Work time',
     'workBreak' => 'Break',
     'lookOnMap' => 'Look on the map',
-    'admin' => [
+    'admin'     => [
         'title'     => 'Affiliates',
         'fields'    => [
             'phone'     => 'Phone',
             'address'   => 'Address',
-            'region'   => 'Region',
-            'workTime'   => 'Work time',
-            'workBreak'   => 'Break',
+            'region'    => 'Region',
+            'workTime'  => 'Work time',
+            'workBreak' => 'Break',
         ]
     ]
 

@@ -1,4 +1,4 @@
 <?php
-return[
-  'title'=>'Фото галерея'
+return [
+    'title' => 'Фото галерея'
 ];

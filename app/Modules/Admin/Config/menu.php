@@ -4,10 +4,10 @@
 return [
     'groups'=>[
         [
-            'title' => trans('admin::admin.users'),
-            'slug'=>'users',
-            'icon' => 'fa-users',
-            'priority' => 100
+            'title'     => trans('admin::admin.users'),
+            'slug'      => 'users',
+            'icon'      => 'fa-users',
+            'priority'  => 100
         ],
         [
             'title'     => trans('admin::admin.content'),
@@ -41,6 +41,4 @@ return [
             'slug'      => 'files'
         ]
     ]
-
-
 ];

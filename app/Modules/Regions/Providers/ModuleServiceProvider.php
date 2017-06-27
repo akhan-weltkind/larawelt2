@@ -2,12 +2,10 @@
 
 namespace App\Modules\Regions\Providers;
 
-
 use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider
 {
-
     public $module = 'regions';
 
     /**
@@ -20,6 +18,4 @@ class ModuleServiceProvider extends ModuleProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->make('view')->composer('affiliates::admin.form', 'App\Modules\Regions\Http\ViewComposers\RegionsComposer');
     }
-
-
 }

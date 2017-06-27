@@ -125,13 +125,12 @@ abstract class Search
      */
     public function addNodes($result, $module, $title, $catalog = false)
     {
-        $resultArray = array();
+        $resultArray = [];
 
         if ((is_object($result) && $result->count() >= 1) || (is_array($result) && count($result) >= 1)) {
-            $resultArray[$module]['title'] = $title;
-            $nodes = array();
-
-            $resultArray[$module]['html'] = $this->getModuleHtml($result);
+            $resultArray[$module]['title']  = $title;
+            $nodes                          = [];
+            $resultArray[$module]['html']   = $this->getModuleHtml($result);
 
             if ($resultArray[$module]['html']) {
                 $total = count($result);
@@ -139,27 +138,27 @@ abstract class Search
             } else {
                 if ($catalog) {
                     foreach ($result as $num => $row) {
-                        $nodes[] = array(
-                            'title' => $this->getTitle($row),
-                            'url' => $this->getUrl($row),
-                            'preview' => $this->getPreview($row),
+                        $nodes[] = [
+                            'title'     => $this->getTitle($row),
+                            'url'       => $this->getUrl($row),
+                            'preview'   => $this->getPreview($row),
                             'articulus' => $row->articulus,
-                            'price' => $row->price,
-                            'image' => $row->image,
-                            'date' => $this->getDate($row),
-                            'html' => $this->getNodesHtml($row),
-                        );
+                            'price'     => $row->price,
+                            'image'     => $row->image,
+                            'date'      => $this->getDate($row),
+                            'html'      => $this->getNodesHtml($row),
+                        ];
                         self::$total++;
                     }
                 } else {
                     foreach ($result as $num => $row) {
-                        $nodes[] = array(
-                            'title' => $this->getTitle($row),
-                            'url' => $this->getUrl($row),
-                            'preview' => $this->getPreview($row),
-                            'date' => $this->getDate($row),
-                            'html' => $this->getNodesHtml($row),
-                        );
+                        $nodes[] = [
+                            'title'     => $this->getTitle($row),
+                            'url'       => $this->getUrl($row),
+                            'preview'   => $this->getPreview($row),
+                            'date'      => $this->getDate($row),
+                            'html'  => $this->getNodesHtml($row),
+                        ];
                         self::$total++;
                     }
                 }
@@ -180,28 +179,28 @@ abstract class Search
      */
     protected function _prepareSearchText($text)
     {
-        $swaps = array(
-            0 => array(0, 1, 2),
-            1 => array(0, 2, 1),
-            2 => array(1, 0, 2),
-            3 => array(1, 2, 0),
-            4 => array(2, 0, 1),
-            5 => array(2, 1, 0),
-            6 => array(0, 1),
-            7 => array(1, 0),
-            8 => array(0, 2),
-            9 => array(2, 0),
-            10 => array(1, 2),
-            11 => array(2, 1),
-        );
+        $swaps = [
+            0   => [0, 1, 2],
+            1   => [0, 2, 1],
+            2   => [1, 0, 2],
+            3   => [1, 2, 0],
+            4   => [2, 0, 1],
+            5   => [2, 1, 0],
+            6   => [0, 1],
+            7   => [1, 0],
+            8   => [0, 2],
+            9   => [2, 0],
+            10  => [1, 2],
+            11  => [2, 1],
+        ];
 
         $stemmer = new Stem;
         $text = preg_replace("/[^\w\sа-яё]/iu", " ", strip_tags($text));
         $text = explode(' ', $text);
 
-        $word_array = array();
+        $word_array = [];
 
-        $this->_minWords = array();
+        $this->_minWords = [];
 
         foreach ($text as $word) {
             if (strlen($word) >= 3) {
@@ -212,20 +211,20 @@ abstract class Search
         }
 
         if (sizeof($word_array) == 0) {
-            return array();
+            return [];
         } elseif (sizeof($word_array) == 1) {
-            return array('%' . $word_array[0] . '%');
+            return ['%' . $word_array[0] . '%'];
         }
 
-        $result = array();
+        $result = [];
         for ($i = 0; $i < sizeof($swaps); $i++) {
-            $cur_words = array();
+            $cur_words = [];
             if (sizeof($swaps[$i]) <= sizeof($word_array)) {
                 for ($j = 0; $j < sizeof($swaps[$i]); $j++) {
                     if ($swaps[$i][$j] < sizeof($word_array)) {
                         $cur_words[] = $word_array[$swaps[$i][$j]];
                     } else {
-                        $cur_words = array();
+                        $cur_words = [];
                         break;
                     }
                 }

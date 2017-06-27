@@ -40,6 +40,4 @@
         @endif
 
     </div>
-
-
 @endsection

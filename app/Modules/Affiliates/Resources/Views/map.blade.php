@@ -9,7 +9,6 @@
 <script>
     var map;
     function initMap() {
-
         var zoom = parseInt('{{ $entity->zoom }}');
         var lat = parseFloat('{{ $entity->lat }}');
         var lng = parseFloat('{{ $entity->lng }}');
@@ -19,17 +18,15 @@
             center: {lat: lat, lng: lng},
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true
-        };
+        },
+            map     = new google.maps.Map(document.getElementById('map'), options),
+            marker  = new google.maps.Marker({
+                position: {lat: lat, lng: lng},
+                map: map,
+                title: '{{ $entity->title }}'
+            }),
+            infowindow = new google.maps.InfoWindow();
 
-        var map = new google.maps.Map(document.getElementById('map'), options);
-
-        var marker = new google.maps.Marker({
-            position: {lat: lat, lng: lng},
-            map: map,
-            title: '{{ $entity->title }}'
-        });
-
-        var infowindow = new google.maps.InfoWindow();
         infowindow.setContent($('.affiliate-info').html());
         infowindow.open(map, marker);
 

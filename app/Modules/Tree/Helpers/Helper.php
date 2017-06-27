@@ -7,8 +7,6 @@ class Helper{
 
     public static function getModulesSelect($all = false){
         $modules = Module::all();
-        dd($modules);
+        return $modules;
     }
-
-
 }

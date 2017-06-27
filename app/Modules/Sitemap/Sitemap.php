@@ -20,9 +20,9 @@ class Sitemap
 
     public function __construct( $module )
     {
-        $this->module = $module;
-        $modelPath = '\App\Modules\\' . $module . '\Models\\' . $module;
-        $this->model = new $modelPath();
+        $this->module   = $module;
+        $modelPath      = '\App\Modules\\' . $module . '\Models\\' . $module;
+        $this->model    = new $modelPath();
     }
 
     public function getRootLocs( $limit, $locale )
@@ -34,8 +34,7 @@ class Sitemap
         }
 
         $limits = ceil( $count / $limit );
-
-        $locs = [];
+        $locs   = [];
 
         for ($i = 1; $i <= $limits; $i++) {
             $locs[] = url( $locale.'/sitemap/' . lcfirst($this->module) . '_' . $i . '.xml' );
@@ -47,7 +46,6 @@ class Sitemap
     public function getLocs( $limit, $offset ){
         $res        = '';
         $result     = [];
-
         $attributes = $this->model->first()->getAttributes();
 
         if ( is_array($attributes) ) {
@@ -66,15 +64,13 @@ class Sitemap
         }
 
         return $result;
-
     }
 
     public function prepareLoc( $ent )
     {
         $r = ['loc' => $this->getUrl( $ent )];
-
-
         $r = $r + $this->defaultParams;
+
         if ( isset( $ent->updated_at ) ) {
             $r['lastmod'] = date( 'c', strtotime($ent->updated_at) );
         }
@@ -84,7 +80,6 @@ class Sitemap
 
     public function getUrl( $row )
     {
-        //dump(module_config('settings',$module));
         if ( count(config('localization.supported-locales')) > 1 ){
             return url(\Lang::locale() . '/' . $this->route,['id' => $row->getRouteKey() ]);
         }
@@ -92,5 +87,4 @@ class Sitemap
             return url( $this->route, ['id' => $row->getRouteKey()] );
         }
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
 return[
-    'home'=>'Главная',
-    'search_title' => 'Содержание',
+    'home'          => 'Главная',
+    'search_title'  => 'Содержание',
 ];

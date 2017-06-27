@@ -7,7 +7,6 @@ use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider
 {
-
     public $module = 'gallery';
 
     /**
@@ -18,8 +17,5 @@ class ModuleServiceProvider extends ModuleProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
     }
-
-
 }

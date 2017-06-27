@@ -1,9 +1,9 @@
 {{--
     Чтобы вьюшка корректно работала нужно передать в неё следующие переменные:
     $entity - модель в которой есть поля $entity->lat, $entity->lng,$entity->zoom
-    $lat - lat по умолчанию
-    $lng - lng по умолчанию
-    $zoom - zoom по умолчанию
+    $lat    - lat по умолчанию
+    $lng    - lng по умолчанию
+    $zoom   - zoom по умолчанию
 --}}
 
 @push('js')
@@ -53,7 +53,6 @@
                     id: "TRACKER",
                     latLng: [parseFloat('{{$entity->lat?$entity->lat:$lat}}'), parseFloat('{{$entity->lng?$entity->lng:$lng}}')]
                 }
-
             });
     });
 

@@ -1,6 +1,5 @@
 <?php
 return [
-
     'items' => [
         [
             'icon'      => 'fa-tree',
@@ -11,7 +10,5 @@ return [
             'slug'      => 'tree'
         ]
     ]
-
-
 ];
 

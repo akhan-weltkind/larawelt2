@@ -2,7 +2,6 @@
 
 namespace App\Modules\Roles\Providers;
 
-
 use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider
@@ -18,8 +17,5 @@ class ModuleServiceProvider extends ModuleProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
     }
-
-
 }

@@ -22,6 +22,4 @@ class ModuleServiceProvider extends ModuleProvider
             return new Sitemap();
         });
     }
-
-
 }

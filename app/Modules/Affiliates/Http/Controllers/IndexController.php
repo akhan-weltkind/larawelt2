@@ -7,22 +7,25 @@ use App\Modules\Affiliates\Models\Affiliates;
 
 class IndexController extends Controller
 {
-
-
     public function getModel()
     {
         return new Affiliates;
     }
 
-    public function index(){
-
-        return view($this->getIndexViewName(), ['items'=>$this->getModel()->active()->get(), 'routePrefix'=>$this->routePrefix]);
+    public function index()
+    {
+        return view(
+            $this->getIndexViewName(),
+            [
+                'items'         => $this->getModel()->active()->get(),
+                'routePrefix'   => $this->routePrefix
+            ]);
     }
 
     public function bigMap(){
+        $items  = [];
+        $i      = 0;
 
-        $items = [];
-        $i = 0;
         foreach ($this->getModel()->active()->get() as $item){
             $items[$i][0] = $item->id;
             $items[$i][1] = $item->lat;
@@ -37,8 +40,10 @@ class IndexController extends Controller
 
         $result = collect($items);
 
-
-        return view('affiliates::big-map')->with(['items'=> json_encode($items), 'routePrefix'=>$this->routePrefix]);
+        return view('affiliates::big-map')->with([
+            'items'         => json_encode($result),
+            'routePrefix'   => $this->routePrefix
+        ]);
     }
 
     public function map($id){

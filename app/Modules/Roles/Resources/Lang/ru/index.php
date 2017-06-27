@@ -1,5 +1,5 @@
 <?php
 return[
-    'title'         => 'Roles',
+    'title'         => 'Группы администраторов',
     'no_records'    => 'Нет записей'
 ];

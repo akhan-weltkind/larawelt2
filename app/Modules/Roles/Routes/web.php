@@ -17,5 +17,4 @@ Route::localizedGroup(function () {
         Route::resource('roles', 'Admin\IndexController');
         Route::get('modules', 'Admin\IndexController@refreshModules')->name('admin.roles.refreshModules');
     });
-
 });

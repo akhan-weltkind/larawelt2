@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Modules\Admin\Providers;
+
 use App\Providers\ModuleProvider;
 use Illuminate\Http\Request;
 
 class ModuleServiceProvider extends ModuleProvider
 {
     public $module = 'admin';
-
 
     /**
      * Register the module services.

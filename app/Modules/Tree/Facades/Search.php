@@ -7,10 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 class Search extends BaseSearch
 {
-    public $tableName = 'tree';
-
-    public $dateField = '';
-    public $previewField = '';
+    public $tableName       = 'tree';
+    public $dateField       = '';
+    public $previewField    = '';
 
     public function getResult()
     {
@@ -19,7 +18,13 @@ class Search extends BaseSearch
             ->where(
                 $this->getSearchSqlWhere(
                     $this->getQuery(),
-                    array('title', 'content','meta_h1', 'meta_title', 'meta_keywords', 'meta_description')
+                    [
+                        'title',
+                        'content',
+                        'meta_h1',
+                        'meta_title',
+                        'meta_keywords',
+                        'meta_description']
                 ))
             ->where('active', 1)
             ->where('lang', \Lang::locale())

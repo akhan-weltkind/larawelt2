@@ -4,7 +4,6 @@ namespace App\Facades;
 class Route extends \Illuminate\Support\Facades\Route{
 
     public static function getAction(){
-
         $parentRoute = parent::getCurrentRoute();
 
         if (!$parentRoute){
@@ -36,11 +35,5 @@ class Route extends \Illuminate\Support\Facades\Route{
         }
 
         return false;
-
     }
-
-
-
-
-
 }

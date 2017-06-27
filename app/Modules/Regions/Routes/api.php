@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/regions', function (Request $request) {
-    // return $request->news();
+    // return $request->regions();
 })->middleware('auth:api');

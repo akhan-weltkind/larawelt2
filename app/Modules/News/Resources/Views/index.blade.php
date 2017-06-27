@@ -37,6 +37,5 @@
         @else
             <p>@lang('news::index.no_records')</p>
         @endif
-
     </div>
 @endsection

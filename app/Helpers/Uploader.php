@@ -4,24 +4,24 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-
 class Uploader{
 
     protected $name = false;
 
-    public function generateName($ext){
+    public function generateName($ext)
+    {
         list($usec, $sec) = explode(" ", microtime());
         $this->name =  time() . "_" . substr($usec, 2) . '.' . $ext;
         return $this->name;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-
-
-    public function upload($file, $config){
+    public function upload($file, $config)
+    {
         $baseDir = public_path() . $config['path'];
 
         $this->dir($baseDir);
@@ -35,25 +35,19 @@ class Uploader{
         else{
             return $this->resizeAndUpload($file, $config);
         }
-
     }
-
-
 
     public function resizeAndUpload($file, $config){
         $baseDir = public_path() . $config['path'];
 
         foreach ($config['thumbs'] as $thumb) {
-
             $path = $baseDir . $thumb['path'];
 
             $this->dir($path);
 
-
             $img = Image::make($file->getRealPath());
 
             if ($thumb['width'] && $thumb['height']) {
-
                 if ($thumb['width'] >= $thumb['height']) {
                     $img->resize($thumb['width'], null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -93,11 +87,9 @@ class Uploader{
             }
 
             $img->save($path . $this->getName());
-
         }
 
         return true;
-
     }
 
     public function dir($path){
@@ -121,11 +113,9 @@ class Uploader{
         }
 
         return true;
-
     }
 
     public function fullUrl($config){
-
         if (!isset($config['thumbs'])){
             return false;
         }
@@ -142,12 +132,9 @@ class Uploader{
     }
 
     public function thumbUrl($config){
-
         if (!isset($config['thumbs'])){
             return false;
         }
-
-
 
         foreach ($config['thumbs'] as $thumb){
             if (isset($thumb['thumb']) && $thumb['thumb']== true){
@@ -174,7 +161,4 @@ class Uploader{
             }
         }
     }
-
-
-
 }

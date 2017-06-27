@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Request;
 trait Filters{
 
     public function scopeFiltered($query){
-
         foreach ($this->filters as $input=>$filter){
             if (isset(Request::get('filters')[$input]) && Request::get('filters')[$input]){
                 $where = str_replace('?', Request::get('filters')[$input], $filter[2]);
@@ -16,5 +15,4 @@ trait Filters{
         }
         return $query;
     }
-
 }

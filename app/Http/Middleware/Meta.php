@@ -18,18 +18,12 @@ class Meta
      */
     public function handle($request, Closure $next)
     {
-
-        $meta = [];
-
-
-
+        $meta   = [];
         $entity = Request::getFacadeRoot()->get('entity');
-        $page = Request::getFacadeRoot()->get('page');
-
-        $title = false;
+        $page   = Request::getFacadeRoot()->get('page');
+        $title  = false;
 
         if ($entity) {
-
             if (@$entity->meta_title) {
                 $title = $entity->meta_title;
             }
@@ -37,7 +31,6 @@ class Meta
             if (!$title && @$entity->title) {
                 $title = $entity->title;
             }
-
         }
 
         if ($page){
@@ -62,11 +55,9 @@ class Meta
             $meta['title'] = $title;
         }
 
-
         $h1 = false;
 
         if ($entity) {
-
             if (@$entity->meta_h1) {
                 $h1 = $entity->meta_h1;
             }
@@ -74,7 +65,6 @@ class Meta
             if (!$h1 && @$entity->title) {
                 $h1 = $entity->title;
             }
-
         }
 
         if ($page){
@@ -109,7 +99,6 @@ class Meta
             $meta['keywords'] = $keywords;
         }
 
-
         $description = false;
 
         if ($entity) {
@@ -128,8 +117,6 @@ class Meta
             if (!$description && @$entity->content){
                 $description = $this->cleanContent($entity->content, 150);
             }
-
-
         }
 
         if ($page){
@@ -145,23 +132,23 @@ class Meta
             $meta['description'] = $description;
         }
 
-
-
         View::share('meta', (object)$meta);
 
-
-
         return $next($request);
-
     }
-
-
 
     protected function cleanContent($content, $length){
-
-      return trim(preg_replace('/&#?[a-z0-9]+;/i', '', str_limit(preg_replace('/\r|\n/', ' ', strip_tags($content)), $length)));
-
+      return trim(
+          preg_replace(
+              '/&#?[a-z0-9]+;/i', '',
+              str_limit(
+                  preg_replace(
+                      '/\r|\n/', ' ',
+                      strip_tags($content)
+                  ),
+                  $length
+              )
+          )
+      );
     }
-
-
 }

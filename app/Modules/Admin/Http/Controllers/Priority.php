@@ -5,8 +5,8 @@ namespace App\Modules\Admin\Http\Controllers;
 trait Priority
 {
 
-    public function priority($id, $direction){
-
+    public function priority($id, $direction)
+    {
         $entity = $this->getModel()->findOrFail($id);
 
         if ($direction == 'up'){
@@ -17,7 +17,6 @@ trait Priority
         }
 
         $entity->save();
-
         $this->after($entity);
 
         return redirect()->back();

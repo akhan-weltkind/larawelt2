@@ -1,6 +1,4 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-
     @if(isset($params['root']) && config('localization.default') == Lang::locale())
             <url>
                 <loc>{{ $params['host'] }}</loc>
@@ -10,7 +8,6 @@
     @endif
 
     @foreach($params['locs'] as $url)
-
         @if(!$url['loc'])
             @continue
         @endif
@@ -31,5 +28,4 @@
             @endif
         </url>
     @endforeach
-
 </urlset>

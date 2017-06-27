@@ -12,7 +12,5 @@
 */
 
 Route::group(['prefix' => 'search', 'middleware' => 'page'], function() {
-
     Route::post('/', 'IndexController@search')->name('search');
-
 });

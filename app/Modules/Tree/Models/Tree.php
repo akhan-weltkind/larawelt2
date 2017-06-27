@@ -6,13 +6,7 @@ use App\Models\Tree as ParentTree;
 use Kyslik\ColumnSortable\Sortable;
 
 class Tree extends ParentTree{
-
     use Sortable;
 
     protected $table = 'tree';
-
-
-
-
-
 }

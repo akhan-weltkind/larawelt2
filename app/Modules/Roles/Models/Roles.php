@@ -7,32 +7,34 @@ use App\Modules\Admins\Models\Admins;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 
-
 class Roles extends Model
 {
     use Notifiable, Sortable;
 
     public $timestamps = false;
 
-    public function scopeOrder($query){
+    public function scopeOrder($query)
+    {
         return $query;
     }
 
-    public function saveData(array $data){
+    public function saveData(array $data)
+    {
         foreach ($data['permissions'] as $moduleId => $permission) {
             $permissionEntity               = new Permission();
             $permissionEntity->module_id    = $moduleId;
-            $permissionEntity->read         = $permission['read'];
-            $permissionEntity->create       = $permission['create'];
-            $permissionEntity->publish      = $permission['publish'];
-            $permissionEntity->update       = $permission['update'];
-            $permissionEntity->delete       = $permission['delete'];
+            $permissionEntity->read         = isset($permission['read'])?$permission['read']:1;
+            $permissionEntity->create       = isset($permission['create'])?$permission['create']:1;
+            $permissionEntity->publish      = isset($permission['publish'])?$permission['publish']:1;
+            $permissionEntity->update       = isset($permission['update'])?$permission['update']:1;
+            $permissionEntity->delete       = isset($permission['delete'])?$permission['delete']:1;
 
             $this->permissions()->save($permissionEntity);
         }
     }
 
-    public function updateData(array $data){
+    public function updateData(array $data)
+    {
         $this->title    = $data['title'];
         $this->active   = $data['active'];
         $permissions    = $this->permissions()->get();
@@ -40,11 +42,21 @@ class Roles extends Model
         if(!$permissions->isEmpty()){
             foreach ($permissions as $permission){
 
-                $read = isset($data['permissions'][$permission->module_id]['read'])?$data['permissions'][$permission->module_id]['read']:1;
-                $create = isset($data['permissions'][$permission->module_id]['create'])?$data['permissions'][$permission->module_id]['create']:1;
-                $publish = isset($data['permissions'][$permission->module_id]['publish'])?$data['permissions'][$permission->module_id]['publish']:1;
-                $update = isset($data['permissions'][$permission->module_id]['update'])?$data['permissions'][$permission->module_id]['update']:1;
-                $delete = isset($data['permissions'][$permission->module_id]['delete'])?$data['permissions'][$permission->module_id]['delete']:1;
+                $read    = isset($data['permissions'][$permission->module_id]['read'])?
+                           $data['permissions'][$permission->module_id]['read']:
+                           1;
+                $create  = isset($data['permissions'][$permission->module_id]['create'])?
+                           $data['permissions'][$permission->module_id]['create']:
+                           1;
+                $publish = isset($data['permissions'][$permission->module_id]['publish'])?
+                           $data['permissions'][$permission->module_id]['publish']:
+                           1;
+                $update  = isset($data['permissions'][$permission->module_id]['update'])?
+                           $data['permissions'][$permission->module_id]['update']:
+                           1;
+                $delete  = isset($data['permissions'][$permission->module_id]['delete'])?
+                           $data['permissions'][$permission->module_id]['delete']:
+                           1;
 
                 $permission->update([
                     'read'      => $read,
@@ -64,13 +76,13 @@ class Roles extends Model
         return $this->belongsToMany(Permission::class,'permission_roles');
     }
 
-    public function admins(){
+    public function admins()
+    {
         return $this->hasMany(Admin::class);
     }
 
-    public static function getSelect(){
-
-
+    public static function getSelect()
+    {
         $roles = collect();
 
         foreach (self::all() as $role){

@@ -1,31 +1,21 @@
 @extends('admin::admin.index')
 
 @section('filters')
-
     {!! BootForm::open([ 'route' => $routePrefix.'store', 'method' => 'get']) !!}
-    <div class="box box-primary box-filters">
-        <div class="box-header"></div>
-        <div class="box-body">
-            <div class="col-md-3">
-                {!! BootForm::text('filters[title]', trans('admin::fields.title'),  Request::get('filters')['title']) !!}
-            </div>
+        <div class="box box-primary box-filters">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <div class="col-md-3">
+                    {!! BootForm::text('filters[title]', trans('admin::fields.title'),  Request::get('filters')['title']) !!}
+                </div>
 
-            <div class="col-md-3">
-
-            </div>
-
-            <div class="col-md-3">
+                <div class="col-md-1 filters-button">
+                    {!! BootForm::submit(trans('admin::admin.select')) !!}
+                </div>
 
             </div>
-
-            <div class="col-md-1 filters-button">
-                {!! BootForm::submit(trans('admin::admin.select')) !!}
-            </div>
-
         </div>
-    </div>
     {!! BootForm::close() !!}
-
 @endsection
 
 @section('th')
@@ -42,8 +32,12 @@
             <td>{{ $entity->date }}</td>
             <td>{{ $entity->title }}</td>
             <td>{!!  $entity->preview !!}</td>
-            <td class="priority">@include ('admin::common.controls.priority', ['routePrefix'=>$routePrefix, 'entity'=>$entity])</td>
-            <td class="controls">@include ('admin::common.controls.all', ['routePrefix'=>$routePrefix, 'id'=>$entity->id])</td>
+            <td class="priority">
+                @include ('admin::common.controls.priority', ['routePrefix'=>$routePrefix, 'entity'=>$entity])
+            </td>
+            <td class="controls">
+                @include ('admin::common.controls.all', ['routePrefix'=>$routePrefix, 'id'=>$entity->id])
+            </td>
         </tr>
     @endforeach
 @endsection

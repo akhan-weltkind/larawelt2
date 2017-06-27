@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
         //$module = Modules::where('slug', 'files')->first();
         if (!$module) {
             Modules::create([
-                'slug' => 'images',
+                'slug'  => 'images',
                 'title' => 'Изображения'
             ]);
         } elseif ($module->title != 'Изображения') {
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
 
         if (!$module) {
             Modules::create([
-                'slug' => 'files',
+                'slug'  => 'files',
                 'title' => 'Файлы'
             ]);
         } elseif ($module->title != 'Файлы') {

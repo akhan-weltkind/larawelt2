@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Users\Providers;
+
 use App\Providers\ModuleProvider;
 
 class ModuleServiceProvider extends ModuleProvider

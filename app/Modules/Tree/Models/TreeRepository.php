@@ -5,21 +5,18 @@ use App\Modules\Tree\Models\Tree as Model;
 
 class TreeRepository
 {
-
     public function getRoutes()
     {
         $routes = Model::active()->get();
+        $url    = [];
 
-        $url = [];
         foreach ($routes as $num => $route) {
-
             if ($num > 0) {
                 if ($route->depth > $routes[$num - 1]->depth) {
                     $url[] = $routes[$num - 1]->slug;
                 }
 
                 if ($route->depth < $routes[$num - 1]->depth) {
-
                     $diff = $route->depth - $routes[$num - 1]->depth;
                     $url = array_slice($url, 0, $diff);
                 }
@@ -48,7 +45,6 @@ class TreeRepository
 
     public function getSelect()
     {
-
         $keyed = collect();
 
         Model::admin()->get()->mapWithKeys(function ($item) use ($keyed) {
@@ -56,7 +52,6 @@ class TreeRepository
         });
 
         return $keyed;
-
     }
 
 }

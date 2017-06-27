@@ -20,7 +20,6 @@ class ForgotPasswordController extends Controller
     */
     use SendsPasswordResetEmails,ValidatesRequests;
 
-
     public function getModel()
     {
         // TODO: Implement getModel() method.

@@ -2,10 +2,7 @@
 namespace App\Facades;
 
 class Date{
-
-
     public static function _($format = 'd.m.Y', $date = false) {
-
         if (!$date) {
             $date = time();
         }

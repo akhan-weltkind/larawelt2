@@ -17,10 +17,10 @@ abstract class Controller extends BaseController
     public $og = true;
     public $meta = true;
 
-
     abstract public function getModel();
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->setRoutePrefix();
         $this->setViewPrefix();
 
@@ -29,7 +29,8 @@ abstract class Controller extends BaseController
 
     }
 
-    protected function fetchEntity(){
+    protected function fetchEntity()
+    {
         $id = Request::getFacadeRoot()->id;
         if (action() == 'show' && $id){
             $entity = $this->getModel()->findOrFail($id);
@@ -38,7 +39,8 @@ abstract class Controller extends BaseController
         }
     }
 
-    protected function setMiddleware(){
+    protected function setMiddleware()
+    {
         $this->middleware('breadcrumbs');
 
         //Если не надо автоматически выводить последнюю крампу
@@ -48,14 +50,15 @@ abstract class Controller extends BaseController
 
     }
 
-    protected function setRoutePrefix(){
+    protected function setRoutePrefix()
+    {
         if (module() && !$this->routePrefix){
             $this->routePrefix = module().'.';
         }
     }
 
-    protected function setViewPrefix(){
-
+    protected function setViewPrefix()
+    {
         if (module() && !$this->viewPrefix){
             $this->viewPrefix = module().'::';
         }
@@ -70,13 +73,13 @@ abstract class Controller extends BaseController
     }
 
     public function index(){
-        return view($this->getIndexViewName(), ['items'=>$this->getModel()->active()->paginate($this->perPage), 'routePrefix'=>$this->routePrefix]);
+        return view($this->getIndexViewName(), [
+            'items'=>$this->getModel()->active()->paginate($this->perPage),
+            'routePrefix'=>$this->routePrefix
+        ]);
     }
 
     public function show($id){
         return view($this->getShowViewName(), ['routePrefix'=>$this->routePrefix]);
     }
-
-
-
 }

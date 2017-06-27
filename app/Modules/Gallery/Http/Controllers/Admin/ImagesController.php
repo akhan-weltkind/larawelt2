@@ -6,10 +6,8 @@ use App\Modules\Admin\Http\Controllers\Images;
 use App\Modules\Gallery\Models\Gallery;
 use App\Modules\Gallery\Models\Image;
 
-
 class ImagesController extends Images
 {
-
     public function getParentModel()
     {
         return new Gallery();
@@ -19,5 +17,4 @@ class ImagesController extends Images
     {
         return new Image();
     }
-
 }

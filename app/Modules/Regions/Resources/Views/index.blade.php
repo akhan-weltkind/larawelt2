@@ -33,10 +33,8 @@
                 </div>
             @endforeach
             {{  $items->appends(\Request::except('page'))->links('common.paginate') }}
-
         @else
             <p>@lang('news::index.no_records')</p>
         @endif
-
     </div>
 @endsection

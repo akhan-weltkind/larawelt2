@@ -2,11 +2,11 @@
 
 namespace App\Modules\Admin\Http\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Auth;
 
 class LoginController extends Controller
@@ -39,7 +39,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->redirectTo = '/'.config('cms.uri');
-       /* $this->middleware('admin', ['except' => 'logout']);*/
     }
 
     public function showLoginForm()
@@ -49,7 +48,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-
         $this->guard()->logout();
 
         $request->session()->flush();

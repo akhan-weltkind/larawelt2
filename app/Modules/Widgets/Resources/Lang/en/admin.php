@@ -1,7 +1,7 @@
 <?php
 return[
-    'title'=>'Widgets',
-    'html'=>'Text',
-    'wysiwyg'=>'WYSIWYG',
+    'title'     => 'Widgets',
+    'html'      => 'Text',
+    'wysiwyg'   => 'WYSIWYG',
 
 ];

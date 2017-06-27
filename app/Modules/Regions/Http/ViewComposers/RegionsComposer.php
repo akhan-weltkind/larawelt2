@@ -6,7 +6,6 @@ use App\Modules\Regions\Models\Regions;
 
 class RegionsComposer
 {
-
     protected $repository;
 
     public function __construct(Regions $repository){
@@ -14,10 +13,9 @@ class RegionsComposer
     }
 
     public function compose(View $view){
-        $model = new Regions();
-        $keyed = [];
-
-        $regions = $model->where('active',1)->get();
+        $model      = new Regions();
+        $keyed      = [];
+        $regions    = $model->where('active',1)->get();
 
         foreach ($regions as $region){
             $keyed[$region->id] = $region->title;

@@ -6,7 +6,6 @@
             <span class="logo-lg"><b>Lara</b>CMS</span>
         </a>
         <nav class="navbar navbar-static-top">
-
             @if (Auth::guard('admin')->user())
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -29,7 +28,6 @@
 
     @include('admin::common.menu')
 
-
     <div class="content-wrapper">
         <section class="content-header">
             @yield('title')
@@ -38,7 +36,6 @@
             @section('topmenu')
                 @include('admin::common.topmenu.all')
             @show
-
         </section>
         <section class="content">
             <div class="box">

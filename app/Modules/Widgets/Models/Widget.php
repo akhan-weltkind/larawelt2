@@ -7,11 +7,10 @@ use Illuminate\Notifications\Notifiable;
 
 class Widget extends Model
 {
-
     use Notifiable, Sortable;
 
-
-    public function scopeOrder($query){
+    public function scopeOrder($query)
+    {
         return $query->orderBy('slug', 'asc');
     }
 
@@ -19,6 +18,4 @@ class Widget extends Model
     {
         return $query->where('active', 1)->order();
     }
-
-
 }
