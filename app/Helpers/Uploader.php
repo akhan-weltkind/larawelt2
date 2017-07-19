@@ -87,6 +87,13 @@ class Uploader{
             }
 
             $img->save($path . $this->getName());
+
+            if ($img->extension == 'png') {
+                $img->encode('png');
+            }
+            elseif($img->extension == 'jpeg' || $img->extension == 'jpg') {
+                $img->encode('jpg',75);
+            }
         }
 
         return true;
