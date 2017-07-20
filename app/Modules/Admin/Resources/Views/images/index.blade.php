@@ -3,8 +3,7 @@
         <div class="timeline-body" id="item-{!!$entity->id!!}">
             @if ($entity->imagePath('full'))
                 <a href="{!!$entity->imagePath('full')!!}" rel="ajax">
-                    <img class="margin thumb" src="{!!$entity->imagePath('mini')?:$entity->imagePath('thumb')!!}">
-                </a>
+                    <img class="margin thumb" src="{!!$entity->imagePath('mini')?:$entity->imagePath('thumb')!!}"></a>
             @else
                 <img class="margin thumb" src="{!!$entity->imagePath('mini')?:$entity->imagePath('thumb')!!}">
             @endif

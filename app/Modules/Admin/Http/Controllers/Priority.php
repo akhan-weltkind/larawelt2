@@ -9,10 +9,9 @@ trait Priority
     {
         $entity = $this->getModel()->findOrFail($id);
 
-        if ($direction == 'up'){
-            $entity->priority ++;
-        }
-        else{
+        if ($direction == 'up') {
+            $entity->priority++;
+        } else {
             $entity->priority--;
         }
 

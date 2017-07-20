@@ -102,6 +102,4 @@ abstract class Images extends Controller
             return $config[$this->configField];
         }
     }
-
-
 }

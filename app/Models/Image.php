@@ -6,44 +6,42 @@ namespace App\Models;
 trait Image{
 
 
-    public function imageField()
-    {
+    public function imageField(){
         return 'image';
     }
 
-    public function imagePrefixPath()
-    {
+    public function imagePrefixPath(){
         return '/uploads/'.strtolower($this->getTable()).'/';
     }
 
-    public function getImageThumbAttribute()
-    {
+    public function getImageThumbAttribute(){
         return $this->imagePath('thumb');
     }
 
-    public function getImageMiniAttribute()
-    {
+    public function getImageMiniAttribute(){
         return $this->imagePath('mini');
     }
 
-    public function getImageFullAttribute()
-    {
+    public function getImageFullAttribute(){
         return $this->imagePath('full');
     }
 
+    public function imagePath($slug=false){
 
-    public function imagePath($slug)
-    {
         $image = $this->{$this->imageField()} ;
 
         if (!$image){
             return false;
         }
 
-        if (!is_file(public_path().$this->imagePrefixPath().$slug.'/'.$image)){
+        if ($slug){
+            $slug.='/';
+        }
+
+        if (!is_file(public_path().$this->imagePrefixPath().$slug.$image)){
             return false;
         }
 
-        return $this->imagePrefixPath().$slug.'/'.$image;
+        return $this->imagePrefixPath().$slug.$image;
     }
 }
