@@ -41,7 +41,6 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta name="theme-color" content="#ffffff">
 
-
     <link type="image/png" href="/favicons/favicon.ico" rel="icon" sizes="48x48">
     <link type="image/png" href="/favicons/favicon-32x32.png" rel="icon" sizes="32x32">
     <link type="image/png" href="/favicons/favicon-16x16.png" rel="icon" sizes="16x16">

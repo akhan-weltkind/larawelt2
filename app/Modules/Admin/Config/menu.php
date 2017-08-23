@@ -20,7 +20,7 @@ return [
             'slug'      => 'modules',
             'icon'      => 'fa-file',
             'priority'  => 98
-        ]
+        ],
     ],
 
     'items' => [

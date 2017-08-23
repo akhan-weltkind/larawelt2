@@ -212,8 +212,7 @@ class IndexController extends Admin
                         if($permissions){
                             foreach ($permissions as $permission){
                                 if($module && $module->slug === $item->slug && $module->id == $permission->module_id){
-                                    $permission->delete();
-                                    $module->destroy();
+                                    $module->delete();
                                     $role->permissions()->detach($permission->id);
                                 }
                             }

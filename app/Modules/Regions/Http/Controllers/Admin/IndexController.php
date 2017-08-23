@@ -10,6 +10,11 @@ class IndexController extends Admin
 {
     use Priority;
 
+    /* тут должен быть slug модуля для правильной работы меню */
+    public $page = 'regions';
+    /* тут должен быть slug группы для правильной работы меню */
+    public $pageGroup = 'modules';
+
     public function getModel()
     {
         return new Regions();

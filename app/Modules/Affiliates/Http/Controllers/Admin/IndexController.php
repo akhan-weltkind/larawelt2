@@ -12,6 +12,10 @@ class IndexController extends Admin
 
     /* тут должен быть slug модуля для правильной работы меню */
     public $page = 'affiliates';
+    /* тут должен быть slug группы для правильной работы меню */
+    public $pageGroup = 'modules';
+
+
 
     public function getModel()
     {

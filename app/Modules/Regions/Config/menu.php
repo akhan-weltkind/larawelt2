@@ -3,7 +3,7 @@ return[
     'items' => [
         [
             'icon'      => 'fa-list-alt',
-            'group'     => 'maps',
+            'group'     => 'modules',
             'priority'  => 2,
             'route'     => 'admin.regions.index',
             'title'     => trans('regions::index.admin.title'),
